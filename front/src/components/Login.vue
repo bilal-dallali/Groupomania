@@ -60,7 +60,6 @@ body
 {
   align-items: center;
   padding-bottom: 40px;
-  background-color: #f5f5f5;
 }
 
 .form-signin 
@@ -105,9 +104,9 @@ body
 }
 
 @media (min-width: 768px) {
-.bd-placeholder-img-lg 
-{
-  font-size: 3.5rem;
-}
+    .bd-placeholder-img-lg 
+    {
+      font-size: 3.5rem;
+    }
 }
 </style>

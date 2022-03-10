@@ -1,6 +1,10 @@
 <script>
+import Card from "./Card.vue"
 export default {
-    name: "Wall"
+    name: "Wall",
+    components: {
+        Card
+    }
 }
 </script>
 
@@ -18,12 +22,22 @@ export default {
             <input class="display-none" id="file-input" type="file">
             <button type="button" class="btn btn-primary mt-1 ms-auto">Post</button>
         </div>
+
+        <hr class="dropdown-divider mt-4" />
+        <Card></Card>
+        <Card></Card>
+        <Card></Card>
+        <Card></Card>
     </div>
 </template>
 
-<style>
-.display-none
+<style module>
+input
 {
     display: none;
+}
+body
+{
+    background-color: #F5F5F51a !important;
 }
 </style>
