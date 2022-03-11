@@ -1,4 +1,13 @@
 <script>
+import Comment from "./Comment.vue"
+import Avatar from "./Avatar.vue"
+export default {
+    name: "Card",
+    components: {
+        Comment,
+        Avatar
+    }
+}
 </script>
 <template>
     <div class="card mb-3 m-auto">
@@ -8,18 +17,28 @@
             alt="Avatar">
             Catherine de la compta
         </div>
-        <img src="https://picsum.photos/200/300" alt="card-img-top" class="card-img-top">
-        <div class="class-body">
+        <img src="https://picsum.photos/400/200" alt="card-img-top" class="card-img-top">
+        <div class="card-body">
             <h5 class="card-title">Card title</h5>
-            <p class="card-text">Text</p>
-            <p class="card-text"><small class="text-muted">Last updated</small></p>
+            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, amet minus maiores rerum quasi natus et voluptates placeat iste asperiores!</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 minutes ago</small></p>
+            <Comment></Comment>
+            <Comment></Comment>
+
+            <div class="d-flex gap-1">
+                <Avatar></Avatar>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username">
+                <button type="button" class="btn btn-primary ms-auto">Post</button>
+            </div>
         </div>
     </div>
 </template>
 <style>
-.card
-{
-    width: 30rem;
+@media (min-width: 768px) {
+    .card
+    {
+        width: 70%;
+    }
 }
 .card-header img
 {
