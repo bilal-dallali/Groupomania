@@ -17,7 +17,7 @@ export default {
                     <li>
                         <router-link to="/home" class="nav-link px-2 text-secondary">Home</router-link>
                     </li>
-                    <li><router-link to="/contact" class="nav-link px-2 text-white">Contact</router-link></li>
+                    <li><router-link to="/profile" class="nav-link px-2 text-white">Profile</router-link></li>
                 </ul>
 
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -25,8 +25,12 @@ export default {
                 </form>
 
                 <div class="text-end">
-                    <button type="button" class="btn btn-outline-light me-2">Login</button>
-                    <button type="button" class="btn btn-primary">Sign-up</button>
+                    <a href="/login">
+                        <button type="button" class="btn btn-outline-light me-2">Logout</button>
+                    </a>
+                    <a href="/login">
+                        <button type="button" class="btn btn-primary">Login</button>
+                    </a>
                 </div>
             </div>
         </div>

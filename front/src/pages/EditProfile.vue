@@ -21,7 +21,7 @@ export default {
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-3">
-                        <h6 class="mb-0">Full Name</h6>
+                        <h6 class="mb-0 mb-576">Full Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                         <input type="text" class="form-control" value="John Doe">
@@ -29,7 +29,7 @@ export default {
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-3">
-                        <h6 class="mb-0">Email</h6>
+                        <h6 class="mb-0 mb-576">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                         <input type="text" class="form-control" value="john@example.com">
@@ -37,7 +37,7 @@ export default {
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-3">
-                        <h6 class="mb-0">Phone</h6>
+                        <h6 class="mb-0 mb-576">Phone</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                         <input type="text" class="form-control" value="(239) 816-9029">
@@ -45,7 +45,7 @@ export default {
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-3">
-                        <h6 class="mb-0">Mobile</h6>
+                        <h6 class="mb-0 mb-576">Mobile</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                         <input type="text" class="form-control" value="(320) 380-4539">
@@ -53,7 +53,7 @@ export default {
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-3">
-                        <h6 class="mb-0">Job</h6>
+                        <h6 class="mb-0 mb-576">Job</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                         <input type="text" class="form-control" value="Front-end developer">
@@ -61,7 +61,7 @@ export default {
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-3">
-                        <h6 class="mb-0">Website</h6>
+                        <h6 class="mb-0 mb-576">Website</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                         <input type="text" class="form-control" value="www.bilal-webdeveloper.com">
@@ -69,7 +69,7 @@ export default {
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-3">
-                        <h6 class="mb-0">Github</h6>
+                        <h6 class="mb-0 mb-576">Github</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                         <input type="text" class="form-control" value="bilal-webdeveloper">
@@ -77,7 +77,7 @@ export default {
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-3">
-                        <h6 class="mb-0">Linkedin</h6>
+                        <h6 class="mb-0 mb-576">Linkedin</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                         <input type="text" class="form-control" value="Bilal Dallali">
@@ -142,6 +142,12 @@ i.bi:hover
     opacity: 0.7;
 }
 
+@media (max-width: 576px) {
+    .mb-576
+    {
+        padding-bottom: 0.3rem;
+    }
+}
 
 
 </style>

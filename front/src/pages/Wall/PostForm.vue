@@ -6,8 +6,7 @@ export default {
 
 <template>
     <div class="form-floating mt-4">
-        <textarea contenteditable class="form-control" placeholder="Leave a comment here" id="floatingTextarea">
-        </textarea>
+        <textarea contenteditable class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
         <label for="floatingTextarea">Comments</label>
     </div>
 

@@ -17,5 +17,8 @@ export default {
 </template>
 
 <style>
-
+body
+{
+  background-color: #5f5f5f1a !important;
+}
 </style>
