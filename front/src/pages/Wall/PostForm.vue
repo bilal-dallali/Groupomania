@@ -5,9 +5,9 @@ export default {
 </script>
 
 <template>
-    <div class="form-floating mt-4">
-        <textarea contenteditable class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-        <label for="floatingTextarea">Comments</label>
+    <div class="mt-4">
+        <!--<textarea contenteditable="true" class="form-control pb-0 pt-2" data-text="comment" placeholder="Leave a comment here" id=""></textarea>-->
+        <textarea class="form-control" rows="2" placeholder="comment"></textarea>
     </div>
 
     <div class="d-flex">
@@ -28,4 +28,6 @@ body
 {
     background-color: #5f5F5F1a !important;
 }
+
+
 </style>
