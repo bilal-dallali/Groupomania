@@ -7,7 +7,7 @@ const app = express()
 // Middleware
 app.use(express.json())
 
-//app.use("/posts", require("./routes/postRoutes"))
+app.use("/posts", require("./routes/postRoutes"))
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
 
