@@ -1,6 +1,6 @@
 <script>
 import LoginPage from "./pages/LoginPage.vue"
-//import RegisterPage from "./pages/RegisterPage.vue"
+import RegisterPage from "./pages/RegisterPage.vue"
 import Navbar from "./components/layout/Navbar.vue"
 
 export default {

@@ -1,3 +1,4 @@
+//STILL USELESS
 const express = require("express")
 const postControllers = require("../controllers/postControllers")
 const router = express.Router()

@@ -1,3 +1,4 @@
+/*
 const db  = require("../config/db")
 
 class Post {
@@ -44,3 +45,4 @@ class Post {
 }
 
 module.exports = Post
+*/

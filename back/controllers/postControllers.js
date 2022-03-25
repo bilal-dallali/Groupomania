@@ -1,3 +1,4 @@
+/*
 const { findAll } = require("../models/Post")
 const Post = require("../models/Post")
 const { post } = require("../routes/postRoutes")
@@ -36,3 +37,4 @@ exports.getPostById = async (req, res, next) => {
         next(error)
     }
 }
+*/
