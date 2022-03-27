@@ -28,7 +28,12 @@ export default {
         <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
 
         <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <input type="email" class="form-control" id="floatingInput" placeholder="username">
+            <label for="username">Username</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="email" class="form-control" id="floatingInput" placeholder="email">
             <label for="floatingInput">Email address</label>
         </div>
 

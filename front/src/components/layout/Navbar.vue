@@ -31,9 +31,7 @@ export default {
                     <a href="/login">
                         <button type="button" class="btn btn-primary">Login</button>
                     </a>
-                    <a href="/register" class="ms-2">
-                        <button type="button" class="btn btn-primary">Register</button>
-                    </a>
+                    
                 </div>
             </div>
         </div>

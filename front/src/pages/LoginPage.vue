@@ -1,23 +1,19 @@
 <script>
 export default {
     name: "LoginPage",
-    /*
-    data() {
-        return {
-            username: "",
-            password: "",
-            error: ""
-        }
+    data: function() {
+      return {
+        mode: "login",
+      }
     },
     methods: {
-        login() {
-            if (this.username === "admin" && this.password === "admin") {
-                this.$router.push("/")
-            } else {
-                this.error = "Invalid credentials"
-            }
-        }
-    }*/
+      switchToCreateAccount: function() {
+        this.mode = 'create'
+      },
+      switchToLogin: function() {
+        this.mode = 'login'
+      },
+    }
 }
 </script>
 
@@ -25,7 +21,25 @@ export default {
     <main class="form-signin">
         <form>
         <img class="mb-2 d-block mx-auto main-logo" src="../../images/icon.svg" alt="main logo">
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <h1 class="h3 mb-3 fw-normal" v-if="mode == 'login'">Please sign in</h1>
+        <h1 class="h3 mb-3 fw-normal" v-if="mode == 'create'">Please register</h1>
+
+        <p class="create-account" v-if="mode == 'login'">Don't have an acccount ?
+          <span @click="switchToCreateAccount()">
+            Create an account
+          </span>
+        </p>
+
+        <p class="create-account" v-else>Already have an account ?
+          <span @click="switchToLogin()">
+            Sign in
+          </span>
+        </p>
+
+        <div class="form-floating" v-if="mode == 'create'">
+            <input type="email" class="form-control" id="floatingInput" placeholder="username">
+            <label for="floatingInput">Username</label>
+        </div>
 
         <div class="form-floating">
             <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
@@ -36,13 +50,21 @@ export default {
             <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
             <label for="floatingPassword">Password</label>
         </div>
-
+<!--
         <div class="checkbox mb-3">
             <label>
             <input type="checkbox" value="remember-me"> Remember me
             </label>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        -->
+        <button class="w-100 btn btn-lg btn-primary" type="submit" v-if="mode == 'login'">
+          Sign in
+        </button>
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit" v-else>
+          Create account
+        </button>
+
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
         </form>
     </main>
@@ -108,6 +130,19 @@ body
   -moz-user-select: none;
   user-select: none;
 }
+
+.create-account
+{
+  font-size: 14px;
+}
+
+.create-account span
+{
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}
+
 
 @media (min-width: 768px) {
     .bd-placeholder-img-lg 

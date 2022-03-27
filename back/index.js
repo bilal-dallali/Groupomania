@@ -3,7 +3,7 @@ const app = express()
 
 const db = require("./config/db.js")
 
-const userRoute = require("./routes/Users")
+const userRoute = require("./routes/User")
 app.use("/user", userRoute)
 
 app.listen(3001, (req, res) => {
