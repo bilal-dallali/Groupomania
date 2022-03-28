@@ -20,4 +20,6 @@ export default {
     </div>
 </template>
 
-<style module></style>
+<style module>
+
+</style>

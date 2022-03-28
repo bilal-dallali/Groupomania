@@ -1,17 +1,16 @@
-// ON importe le paquet express
 const express = require("express")
-
-// ON crée une application express
+const mysql = require("mysql2")
+const cors = require("cors")
+const port = 3001
 const app = express()
 
-const db = require("./config/db")
-
-// routes utilisateur
-const userRoute = require("./routes/User")
-app.use("/api/user", userRoute)
-
-
-// server
-app.listen(3001, (req, res) => {
-    console.log("Server running...")
+app.use(cors())
+app.use(express.json())
+// Routes
+app.post("/api/auth/signup", (req, res) => {
+    console.log("signup request: ", req.body)
+    res.send("signup")
 })
+
+app.get("/", (req, res) => res.send("Hello world !"))
+app.listen(port, () => console.log("listening on port " + port))
