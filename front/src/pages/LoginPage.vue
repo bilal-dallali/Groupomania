@@ -4,6 +4,26 @@ export default {
     data: function() {
       return {
         mode: "login",
+        email: "",
+        username: "",
+        password: "",
+      }
+    },
+    computed: {
+      validatedFields: function() {
+        if (this.mode == 'create') {
+          if (this.email != "" && this.username != "" && this.password != "") {
+            return true
+          } else {
+            return false
+          }
+        } else {
+          if (this.email != "" && this.password != "") {
+            return true
+          } else {
+            return false
+          }
+        }
       }
     },
     methods: {
@@ -13,6 +33,9 @@ export default {
       switchToLogin: function() {
         this.mode = 'login'
       },
+      createAccount: function() {
+        console.log(this.email, this.username, this.password)
+      }
     }
 }
 </script>
@@ -37,17 +60,17 @@ export default {
         </p>
 
         <div class="form-floating" v-if="mode == 'create'">
-            <input type="email" class="form-control" id="floatingInput" placeholder="username">
+            <input v-model="username" type="text" class="form-control" id="floatingInput" placeholder="username">
             <label for="floatingInput">Username</label>
         </div>
 
         <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <input v-model="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
             <label for="floatingInput">Email address</label>
         </div>
 
         <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <input v-model="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
             <label for="floatingPassword">Password</label>
         </div>
 <!--
@@ -57,11 +80,11 @@ export default {
             </label>
         </div>
         -->
-        <button class="w-100 btn btn-lg btn-primary" type="submit" v-if="mode == 'login'">
+        <button class="w-100 btn btn-lg btn-primary disabled" type="submit" v-if="mode == 'login'">
           Sign in
         </button>
 
-        <button class="w-100 btn btn-lg btn-primary" type="submit" v-else>
+        <button @click="createAccount" class="w-100 btn btn-lg btn-primary" :class="{'disabled' : !validatedFields}" type="submit" v-else>
           Create account
         </button>
 
