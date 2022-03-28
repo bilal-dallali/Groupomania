@@ -5,12 +5,33 @@ const axios = require("axios")
 const instance = axios.create({
     baseURL: "http://localhost:3001/api/auth/"
 })
+
+let user = localStorage.getItem("user")
+if (!user) {
+    user = {
+        userId: -1,
+        token: "",
+    }
+} else {
+    try {
+        user = JSON.parse(user)
+        instance.defaults.headers.common["Authorization"] = user.token
+    } catch (ex) {
+        user = {
+            userId: -1,
+            token: "",
+        }
+    }
+}
+
 const store = createStore({
     state: {
         status: "",
-        user: {
-            id: -1,
-            token: "",
+        user: user,
+        userInfos: {
+            username: "",
+            email: "",
+            photo: "",
         }
     },
     mutations: {
@@ -18,7 +39,19 @@ const store = createStore({
             state.status = status
         },
         logUser: function(state, user) {
+            instance.defaults.headers.common["Authorization"] = user.token
+            localStorage.setItem("user", JSON.stringify(user))
             state.user = user
+        },
+        userInfos: function(state, userInfos) {
+            state.userInfos = userInfos
+        },
+        logout: function(state) {
+            state.user = {
+                userId: -1,
+                token: "",
+            }
+            localStorage.removeItem("user")
         }
     },
     actions: {
@@ -51,6 +84,15 @@ const store = createStore({
                     reject(error)
                 })
             })
+        },
+        getUserInfos: ({commit}) => {
+            instance.post('/infos')
+                .then(function (response) {
+                    commit("setStatus", response.data.infos)
+                    resolve(response)
+                })
+                .catch(function () {
+                })
         }
     }
 })
