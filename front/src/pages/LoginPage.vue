@@ -69,7 +69,7 @@ export default {
     name: "LoginPage",
     data: function() {
       return {
-        mode: "create",
+        mode: "login",
         username: "",
         email: "",
         password: "",
