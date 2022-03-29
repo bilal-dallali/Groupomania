@@ -27,7 +27,9 @@ export default {
         this.$store.dispatch("getUserInfos")
     },
     computed: {
-        ...mapState({user: "userInfos",})
+        ...mapState({
+            user: "userInfos",
+        })
     },
     methods: {
         logout: function() {

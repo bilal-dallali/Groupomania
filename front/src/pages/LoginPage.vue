@@ -3,7 +3,7 @@
         <form>
         <img class="mb-2 d-block mx-auto main-logo" src="../../images/icon.svg" alt="main logo">
         <h1 class="h3 mb-3 fw-normal" v-if="mode == 'login'">Please sign in</h1>
-        <h1 class="h3 mb-3 fw-normal" v-if="mode == 'create'">Please register</h1>
+        <h1 class="h3 mb-3 fw-normal" v-else>Please register</h1>
 
         <p class="create-account" v-if="mode == 'login'">Don't have an acccount ?
           <span @click="switchToCreateAccount()">
@@ -63,22 +63,22 @@
 
 
 <script>
-import { mapState } from 'vuex'
+//import { mapState } from 'vuex'
 
 export default {
     name: "LoginPage",
     data: function() {
       return {
-        mode: "login",
-        email: "",
+        mode: "create",
         username: "",
+        email: "",
         password: "",
       }
     },
     mounted: function() {
-      if (this.$store.state.user.userId == -1) {
+      if (this.$store.state.user.userId != -1) {
             this.$router.push("/home")
-            return
+            return;
         }
     },
     computed: {
