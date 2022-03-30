@@ -54,8 +54,9 @@
           <span v-if="status == 'loading'">Creating an account</span>
           <span v-else>Create account</span>
         </button>
-
+<!--
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+        -->
         </form>
     </main>
 </template>
@@ -100,6 +101,13 @@ export default {
       switchToLogin: function() {
         this.mode = 'login'
       },
+      //login() {
+      //  if (this.email === "admin@contact.com" && this.password === "admin") {
+      //    this.$router.push("/")
+      //  } else {
+      //    this.error = "Invalid credentials"
+      //  }
+      //},
       login: function() {
         const self = this
         console.log(this.email, this.username, this.password)
@@ -107,7 +115,7 @@ export default {
           email: this.email,
           password: this.password,
         }).then(function (response) {
-          self.$router.push("/profile")
+          self.$router.push("/")
         }, function (error) {
           console.log(error)
         })
