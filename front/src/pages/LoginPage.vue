@@ -1,22 +1,3 @@
-<script>
-export default {
-    name: "LoginPage",
-    data: function() {
-      return {
-        mode: "login",
-      }
-    },
-    methods: {
-      switchToCreateAccount: function() {
-        this.mode = 'create'
-      },
-      switchToLogin: function() {
-        this.mode = 'login'
-      },
-    }
-}
-</script>
-
 <template>
     <main class="form-signin">
         <form>
@@ -37,18 +18,25 @@ export default {
         </p>
 
         <div class="form-floating" v-if="mode == 'create'">
-            <input type="email" class="form-control" id="floatingInput" placeholder="username">
+            <input v-model="username" type="text" class="form-control" id="floatingInput" placeholder="username">
             <label for="floatingInput">Username</label>
         </div>
 
         <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <input v-model="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
             <label for="floatingInput">Email address</label>
         </div>
 
         <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <input v-model="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
             <label for="floatingPassword">Password</label>
+        </div>
+
+        <div class="form-floating" v-if="mode == 'login' && status == 'error_login'">
+          invalid email address or password
+        </div>
+        <div class="form-floating" v-if="mode == 'create' && status == 'error_create'">
+          invalid email already used
         </div>
 <!--
         <div class="checkbox mb-3">
@@ -57,18 +45,89 @@ export default {
             </label>
         </div>
         -->
-        <button class="w-100 btn btn-lg btn-primary" type="submit" v-if="mode == 'login'">
-          Sign in
+        <button @click="login()" class="w-100 btn btn-lg btn-primary" :class="{'disabled' : !validatedFields}" type="submit" v-if="mode == 'login'">
+          <span v-if="status == 'loading'">Signing in...</span>
+          <span v-else>Sign in</span>
         </button>
 
-        <button class="w-100 btn btn-lg btn-primary" type="submit" v-else>
-          Create account
+        <button @click="createAccount()" class="w-100 btn btn-lg btn-primary" :class="{'disabled' : !validatedFields}" type="submit" v-else>
+          <span v-if="status == 'loading'">Creating an account</span>
+          <span v-else>Create account</span>
         </button>
 
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
         </form>
     </main>
 </template>
+
+
+
+<script>
+import { mapState } from 'vuex'
+
+export default {
+    name: "LoginPage",
+    data: function() {
+      return {
+        mode: "login",
+        email: "",
+        username: "",
+        password: "",
+      }
+    },
+    computed: {
+      validatedFields: function() {
+        if (this.mode == 'create') {
+          if (this.email != "" && this.username != "" && this.password != "") {
+            return true
+          } else {
+            return false
+          }
+        } else {
+          if (this.email != "" && this.password != "") {
+            return true
+          } else {
+            return false
+          }
+        }
+      },
+      //...mapState(['status'])
+    },
+    methods: {
+      switchToCreateAccount: function() {
+        this.mode = 'create'
+      },
+      switchToLogin: function() {
+        this.mode = 'login'
+      },
+      login: function() {
+        const self = this
+        console.log(this.email, this.username, this.password)
+        this.$store.dispatch("login", {
+          email: this.email,
+          password: this.password,
+        }).then(function (response) {
+          self.$router.push("/profile")
+        }, function (error) {
+          console.log(error)
+        })
+      },
+      createAccount: function() {
+        const self = this
+        //console.log(this.email, this.username, this.password)
+        this.$store.dispatch("createAccount", {
+          email: this.email,
+          username: this.username,
+          password: this.password,
+        }).then(function (response) {
+          self.login
+        }, function (error) {
+          console.log(error)
+        })
+      }
+    }
+}
+</script>
 
 
 <style>
