@@ -1,9 +1,28 @@
+<script>
+export default {
+    name: "LoginPage",
+    data: function() {
+      return {
+        mode: "login",
+      }
+    },
+    methods: {
+      switchToCreateAccount: function() {
+        this.mode = 'create'
+      },
+      switchToLogin: function() {
+        this.mode = 'login'
+      },
+    }
+}
+</script>
+
 <template>
     <main class="form-signin">
         <form>
         <img class="mb-2 d-block mx-auto main-logo" src="../../images/icon.svg" alt="main logo">
         <h1 class="h3 mb-3 fw-normal" v-if="mode == 'login'">Please sign in</h1>
-        <h1 class="h3 mb-3 fw-normal" v-else>Please register</h1>
+        <h1 class="h3 mb-3 fw-normal" v-if="mode == 'create'">Please register</h1>
 
         <p class="create-account" v-if="mode == 'login'">Don't have an acccount ?
           <span @click="switchToCreateAccount()">
@@ -18,25 +37,18 @@
         </p>
 
         <div class="form-floating" v-if="mode == 'create'">
-            <input v-model="username" type="text" class="form-control" id="floatingInput" placeholder="username">
+            <input type="email" class="form-control" id="floatingInput" placeholder="username">
             <label for="floatingInput">Username</label>
         </div>
 
         <div class="form-floating">
-            <input v-model="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
             <label for="floatingInput">Email address</label>
         </div>
 
         <div class="form-floating">
-            <input v-model="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
             <label for="floatingPassword">Password</label>
-        </div>
-
-        <div class="form-floating" v-if="mode == 'login' && status == 'error_login'">
-          invalid email address or password
-        </div>
-        <div class="form-floating" v-if="mode == 'create' && status == 'error_create'">
-          invalid email already used
         </div>
 <!--
         <div class="checkbox mb-3">
@@ -45,95 +57,18 @@
             </label>
         </div>
         -->
-        <button @click="login()" class="w-100 btn btn-lg btn-primary" :class="{'disabled' : !validatedFields}" type="submit" v-if="mode == 'login'">
-          <span v-if="status == 'loading'">Signing in...</span>
-          <span v-else>Sign in</span>
+        <button class="w-100 btn btn-lg btn-primary" type="submit" v-if="mode == 'login'">
+          Sign in
         </button>
 
-        <button @click="createAccount()" class="w-100 btn btn-lg btn-primary" :class="{'disabled' : !validatedFields}" type="submit" v-else>
-          <span v-if="status == 'loading'">Creating an account</span>
-          <span v-else>Create account</span>
+        <button class="w-100 btn btn-lg btn-primary" type="submit" v-else>
+          Create account
         </button>
 
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
         </form>
     </main>
 </template>
-
-
-
-<script>
-//import { mapState } from 'vuex'
-
-export default {
-    name: "LoginPage",
-    data: function() {
-      return {
-        mode: "login",
-        username: "",
-        email: "",
-        password: "",
-      }
-    },
-    mounted: function() {
-      if (this.$store.state.user.userId != -1) {
-            this.$router.push("/home")
-            return;
-        }
-    },
-    computed: {
-      validatedFields: function() {
-        if (this.mode == 'create') {
-          if (this.email != "" && this.username != "" && this.password != "") {
-            return true
-          } else {
-            return false
-          }
-        } else {
-          if (this.email != "" && this.password != "") {
-            return true
-          } else {
-            return false
-          }
-        }
-      },
-      //...mapState(['status'])
-    },
-    methods: {
-      switchToCreateAccount: function() {
-        this.mode = 'create'
-      },
-      switchToLogin: function() {
-        this.mode = 'login'
-      },
-      login: function() {
-        const self = this
-        console.log(this.email, this.username, this.password)
-        this.$store.dispatch("login", {
-          email: this.email,
-          password: this.password,
-        }).then(function (response) {
-          self.$router.push("/home")
-        }, function (error) {
-          console.log(error)
-        })
-      },
-      createAccount: function() {
-        const self = this
-        //console.log(this.email, this.username, this.password)
-        this.$store.dispatch("createAccount", {
-          email: this.email,
-          username: this.username,
-          password: this.password,
-        }).then(function (response) {
-          self.login
-        }, function (error) {
-          console.log(error)
-        })
-      }
-    }
-}
-</script>
 
 
 <style>
