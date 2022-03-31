@@ -18,17 +18,17 @@
         </p>
 
         <div class="form-floating" v-if="mode == 'create'">
-            <input v-model="username" type="text" class="form-control" id="floatingInput" placeholder="username">
+            <input v-model="username" name="username" type="text" class="form-control" id="floatingInput" placeholder="username">
             <label for="floatingInput">Username</label>
         </div>
 
         <div class="form-floating">
-            <input v-model="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <input v-model="email" name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
             <label for="floatingInput">Email address</label>
         </div>
 
         <div class="form-floating">
-            <input v-model="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <input v-model="password" name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
             <label for="floatingPassword">Password</label>
         </div>
 
