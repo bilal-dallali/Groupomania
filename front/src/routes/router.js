@@ -10,7 +10,6 @@ const routes = [
     { path: "/profile", component: ProfilePage },
     { path: "/edit-profile", component: EditProfile},
     { path: "/", redirect: "/home" },
-    
 ]
 const router = createRouter({ history: createWebHistory(), routes })
 
