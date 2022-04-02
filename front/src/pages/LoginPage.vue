@@ -45,7 +45,7 @@
             </label>
         </div>
         -->
-        <button @click="login()" class="w-100 btn btn-lg btn-primary" :class="{'disabled' : !validatedFields}" type="submit" v-if="mode == 'login'">
+        <button v-on:click="login()" class="w-100 btn btn-lg btn-primary" :class="{'disabled' : !validatedFields}" type="submit" v-if="mode == 'login'">
           <span v-if="status == 'loading'">Signing in...</span>
           <span v-else>Sign in</span>
         </button>
@@ -65,6 +65,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import axios from "axios"
 
 export default {
     name: "LoginPage",
@@ -109,30 +110,19 @@ export default {
       //  }
       //},
       login: function() {
-        const self = this
-        console.log(this.email, this.username, this.password)
-        this.$store.dispatch("login", {
-          email: this.email,
-          password: this.password,
-        }).then(function (response) {
-          self.$router.push("/")
-        }, function (error) {
-          console.log(error)
-        })
+        axios.post("http://localhost:3001/users/login", {
+          email: "obiwan.kenobi@gmail.com",
+          password: "highground"
+        }).then(response => console.log(response))
       },
-      createAccount: function() {
-        const self = this
-        //console.log(this.email, this.username, this.password)
-        this.$store.dispatch("createAccount", {
-          email: this.email,
-          username: this.username,
-          password: this.password,
-        }).then(function (response) {
-          self.login
-        }, function (error) {
-          console.log(error)
-        })
-      }
+      
+      
+    },
+    mounted() {
+      axios.get("http://localhost:3001/users/login")
+      .then(Response => {
+        console.log(Response)
+      })
     }
 }
 </script>

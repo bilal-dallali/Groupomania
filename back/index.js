@@ -7,7 +7,6 @@ const bodyparser = require("body-parser")
 const cookieParser = require("cookie-parser")
 const session = require("express-session")
 const bcrypt = require("bcrypt")
-//const { response } = require("express")
 const saltRounds = 10
 const port = process.env.PORT
 
