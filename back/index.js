@@ -1,6 +1,5 @@
 const express = require("express")
 require("dotenv").config("/.env")
-const app = express()
 const mysql = require("mysql2")
 const cors = require("cors")
 const bodyparser = require("body-parser")
@@ -8,7 +7,10 @@ const cookieParser = require("cookie-parser")
 const session = require("express-session")
 const bcrypt = require("bcrypt")
 const saltRounds = 10
+const jwt = require("jsonwebtoken")
 const port = process.env.PORT
+
+const app = express()
 
 app.use(express.json())
 app.use(cors({
@@ -78,7 +80,27 @@ app.post("/users/signup", (req, res) => {
             }
         )
     })
-    
+})
+
+const verifyJWT = (req, res, next) => {
+    const token = req.header("x-access-token")
+
+    if(!token) {
+        res.send("NEED A TOKEN !!!")
+    } else {
+        jwt.verify(token, "jwtSecret", (err, decoded) => {
+            if(err) {
+                res.json({ auth: false, message: "Authentification failed !!!"})
+            } else {
+                req.userId = decoded.id
+                next()
+            }
+        })
+    }
+}
+
+app.get("/users/userAuth", verifyJWT, (req, res) => {
+    res.send("You are authentificated !!!!")
 })
 
 app.get("/users/login", (req, res) => {
@@ -102,16 +124,19 @@ app.post("/users/login", (req, res) => {
             if(result.length > 0) {
                 bcrypt.compare(password, result[0].password, (error, response) => {
                     if (response) {
+                        const id = result[0].id
+                        const token = jwt.sign({id}, "jwtSecret", {
+                            expiresIn: 300,
+                        })
                         req.session.user = result
-                        console.log(req.session.user)
-                        res.send(result)
+                        res.json({ auth: true, token: token, result: result })
                     } else {
-                        res.send({ message: "Email or password invalid !"})
+                        res.json({ auth: false, message: "Email or password invalid" })
                     }
                 })
             }
             else {
-                res.send({ message: "User doesn't exist !" })
+                res.json({ auth: false, message: "this user does not exist" })
             }
         }
     )
