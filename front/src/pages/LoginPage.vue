@@ -1,6 +1,6 @@
 <template>
     <main class="form-signin">
-        <form>
+        <form @submit.prevent="login">
         <img class="mb-2 d-block mx-auto main-logo" src="../../images/icon.svg" alt="main logo">
         <h1 class="h3 mb-3 fw-normal" v-if="mode == 'login'">Please sign in</h1>
         <h1 class="h3 mb-3 fw-normal" v-if="mode == 'create'">Please register</h1>
@@ -45,7 +45,7 @@
             </label>
         </div>
         -->
-        <button v-on:click="login()" class="w-100 btn btn-lg btn-primary" :class="{'disabled' : !validatedFields}" type="submit" v-if="mode == 'login'">
+        <button @click="login()" class="w-100 btn btn-lg btn-primary" :class="{'disabled' : !validatedFields}" type="submit" v-if="mode == 'login'">
           <span v-if="status == 'loading'">Signing in...</span>
           <span v-else>Sign in</span>
         </button>
@@ -109,20 +109,38 @@ export default {
       //    this.error = "Invalid credentials"
       //  }
       //},
-      login: function() {
-        axios.post("http://localhost:3001/users/login", {
-          email: "obiwan.kenobi@gmail.com",
-          password: "highground"
-        }).then(response => console.log(response))
+      login: async function() {
+        const response = await axios.post("http://localhost:3001/users/login", {
+          email: this.email,
+          password: this.password
+        })
+        if (!response.data.token) {
+          this.error("Email or password invalid !")
+        } else {
+          this.$router.push("/")
+        }
+        
+        localStorage.setItem("token", response.data.token)
+        //this.$router.push("/")
       },
+      //login: function() {
+      //  axios({
+      //    method: "POST",
+      //    url: "http://localhost:3001/users/login",
+      //    withCredentials: true,
+      //    data: {
+      //      email: this.email,
+      //      password: "this.password"
+      //    }
+      //  })
+      //}
+
+
       
       
     },
     mounted() {
-      axios.get("http://localhost:3001/users/login")
-      .then(Response => {
-        console.log(Response)
-      })
+      
     }
 }
 </script>
