@@ -1,6 +1,6 @@
 <template>
     <main class="form-signin">
-        <form @submit.prevent="login">
+        <form>
         <img class="mb-2 d-block mx-auto main-logo" src="../../images/icon.svg" alt="main logo">
         <h1 class="h3 mb-3 fw-normal" v-if="mode == 'login'">Please sign in</h1>
         <h1 class="h3 mb-3 fw-normal" v-if="mode == 'create'">Please register</h1>
@@ -32,11 +32,11 @@
             <label for="floatingPassword">Password</label>
         </div>
 
-        <div class="form-floating" v-if="mode == 'login' && status == 'error_login'">
-          invalid email address or password
+        <div class="form-floating" v-if="mode == 'login'">
+          <!--invalid email address or password-->
         </div>
-        <div class="form-floating" v-if="mode == 'create' && status == 'error_create'">
-          invalid email already used
+        <div class="form-floating" v-if="mode == 'create'">
+          <!--invalid email already used-->
         </div>
 <!--
         <div class="checkbox mb-3">
@@ -45,12 +45,11 @@
             </label>
         </div>
         -->
-        <button @click="login()" class="w-100 btn btn-lg btn-primary" :class="{'disabled' : !validatedFields}" type="submit" v-if="mode == 'login'">
-          <span v-if="status == 'loading'">Signing in...</span>
-          <span v-else>Sign in</span>
+        <button @click.prevent="login()" class="w-100 btn btn-lg btn-primary" :class="{'disabled' : !validatedFields}" type="submit" v-if="mode == 'login'">
+          Sign in
         </button>
 
-        <button @click="createAccount()" class="w-100 btn btn-lg btn-primary" :class="{'disabled' : !validatedFields}" type="submit" v-else>
+        <button @click.prevent="register()" class="w-100 btn btn-lg btn-primary" :class="{'disabled' : !validatedFields}" type="submit" v-else>
           <span v-if="status == 'loading'">Creating an account</span>
           <span v-else>Create account</span>
         </button>
@@ -102,13 +101,19 @@ export default {
       switchToLogin: function() {
         this.mode = 'login'
       },
-      //login() {
-      //  if (this.email === "admin@contact.com" && this.password === "admin") {
-      //    this.$router.push("/")
-      //  } else {
-      //    this.error = "Invalid credentials"
-      //  }
-      //},
+      register: async function() {
+        const response = await axios.post("http://localhost:3001/users/signup", {
+          username: this.username,
+          email: this.email,
+          password: this.password
+        })
+        if(this.username == "" && this.email == "" && this.password == "") {
+          console.log("Something went wrong")
+        } else {
+          this.$router.push("/")
+          localStorage.setItem("token", response.data.token)
+        }
+      },
       login: async function() {
         const response = await axios.post("http://localhost:3001/users/login", {
           email: this.email,
@@ -119,25 +124,8 @@ export default {
         } else {
           this.$router.push("/")
         }
-        
         localStorage.setItem("token", response.data.token)
-        //this.$router.push("/")
       },
-      //login: function() {
-      //  axios({
-      //    method: "POST",
-      //    url: "http://localhost:3001/users/login",
-      //    withCredentials: true,
-      //    data: {
-      //      email: this.email,
-      //      password: "this.password"
-      //    }
-      //  })
-      //}
-
-
-      
-      
     },
     mounted() {
       
