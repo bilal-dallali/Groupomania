@@ -29,5 +29,8 @@ app.use(session({
 const usersRoute = require("./routes/users.js")
 app.use("/users", usersRoute)
 
+const uploadsRoute = require("./routes/uploads")
+app.use("/uploads", uploadsRoute)
+
 
 app.listen(port, () => console.log("server running on port " + port))

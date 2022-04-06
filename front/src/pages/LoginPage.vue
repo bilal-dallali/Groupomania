@@ -32,11 +32,14 @@
             <label for="floatingPassword">Password</label>
         </div>
 
-        <div class="form-floating" v-if="mode == 'login'">
+        <div class="form-floating invalid mb-2" v-if="mode == 'login'">
           <!--invalid email address or password-->
+          {{ invalidLogin }}
         </div>
-        <div class="form-floating" v-if="mode == 'create'">
+
+        <div class="form-floating invalid mb-2" v-if="mode == 'create'">
           <!--invalid email already used-->
+          {{ invalidRegister }}
         </div>
 <!--
         <div class="checkbox mb-3">
@@ -74,6 +77,8 @@ export default {
         email: "",
         username: "",
         password: "",
+        invalidLogin: "",
+        invalidRegister: ""
       }
     },
     computed: {
@@ -110,8 +115,9 @@ export default {
         if(this.username == "" && this.email == "" && this.password == "") {
           console.log("Something went wrong")
         } else {
+          //localStorage.setItem("token", payload.data.token)
+          console.log(response)
           this.$router.push("/")
-          localStorage.setItem("token", response.data.token)
         }
       },
       login: async function() {
@@ -120,7 +126,7 @@ export default {
           password: this.password
         })
         if (!response.data.token) {
-          this.error("Email or password invalid !")
+          this.invalidLogin = "Invalid email address or password !"
         } else {
           this.$router.push("/")
         }
@@ -204,6 +210,13 @@ body
   text-decoration: underline;
   color: blue;
   cursor: pointer;
+}
+
+.invalid
+{
+  color: red;
+  font-weight: 500;
+  font-size: 0.8rem;
 }
 
 

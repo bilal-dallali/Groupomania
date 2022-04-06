@@ -6,15 +6,15 @@ const jwt = require("jsonwebtoken")
 
 const db = require("../config/db.js")
 
-app.get("/login", (req, res) => {
-    db.query("SELECT * FROM Users;", (err, result) => {
-        if (err) {
-            res.status(400).json(err)
-        } else {
-            res.status(200).json(result)
-        }
-    })
-})
+//app.get("/login", (req, res) => {
+//    db.query("SELECT * FROM Users;", (err, result) => {
+//        if (err) {
+//            res.status(400).json(err)
+//        } else {
+//            res.status(200).json(result)
+//        }
+//    })
+//})
 
 app.post("/signup", (req, res) => {
     const { username, email, password } = req.body
@@ -23,7 +23,7 @@ app.post("/signup", (req, res) => {
         if(err) {
             console.log(err, "Something went wrong")
         } else {
-            console
+            console.log("successfully registered")
         }
         db.query(
             "INSERT INTO Users (username, email, password) VALUES (?, ?, ?);",
@@ -88,14 +88,17 @@ app.post("/login", (req, res) => {
                             expiresIn: 300,
                         })
                         req.session.user = result
-                        res.json({ auth: true, token: token, result: result })
+                        res.json({ auth: true, token: token, email: email, result: result })
+                        res.status(200)
                     } else {
                         res.json({ auth: false, message: "Email or password invalid" })
+                        res.status(400)
                     }
                 })
             }
             else {
                 res.json({ auth: false, message: "this user does not exist" })
+                res.status(400)
             }
         }
     )
