@@ -1,5 +1,5 @@
 <template>
-<form @submit.prevent="upload" enctype="multipart/form-data">
+<form @submit.prevent="upload()" enctype="multipart/form-data">
     <div v-if="message" :class="`message ${error ? 'is-danger' : 'is-success'}`">
         <div class="message-body mt-2">
             {{message}}
@@ -13,8 +13,8 @@
 
     <div class="d-flex">
         <label for="file-input" class="btn btn-secondary mt-1">Add File</label>
-        <input @change="fileUpload" id="file-input" type="file" ref="file" name="file" />
-        <button @click.prevent="upload" type="button" class="btn btn-primary mt-1 ms-auto badge">Post</button>
+        <input id="file-input" type="file" ref="file" name="file" />
+        <button type="submit.prevent" class="btn btn-primary mt-1 ms-auto badge">Post</button>
     </div>
 </form>
 
@@ -49,26 +49,19 @@ export default {
       }
     },
     methods: {
-        fileUpload: function() {
-            this.file = this.$refs.file.files[0]
-        },
+        //fileUpload: function() {
+        //    axios.post("http://localhost:3001/uploads/images", {
+        //        file: this.file
+        //    }).then(() => {
+        //        this.router.push("/login")
+        //    })
+        //},
         upload: async function() {
-            const formData = new FormData()
-            try {
-                await axios.post("http://localhost:3001/uploads", formData)
-                this.message = "File has been uploaded"
-                this.file = ""
-                this.error = false
-            } catch(err) {
-                //console.log(err)
-                this.message = "File was not uploaded"
-                this.error = true
-            }
-            axios.post("http://localhost:3001/uploads", {
+            await axios.post("http://localhost:3001/uploads/posts", {
                 title: this.title,
                 description: this.description,
-                //file: this.file,
-                //author: localStorage.getItem("username")
+                //filename: this.file,
+                author: localStorage.getItem("token")
             }).then(() => {
                 this.$router.push("/")
             })

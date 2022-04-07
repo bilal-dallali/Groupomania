@@ -63,8 +63,8 @@ app.get("/userAuth", verifyJWT, (req, res) => {
 })
 
 app.get("/login", (req, res) => {
-    if (req.session.user) {
-        res.send({ loggedIn: true, user: req.session.user })
+    if (req.session.username) {
+        res.send({ loggedIn: true, username: req.session.username })
     } else {
         res.send({ loggedIn: false })
     }
@@ -87,8 +87,8 @@ app.post("/login", (req, res) => {
                         const token = jwt.sign({id}, "jwtSecret", {
                             expiresIn: 300,
                         })
-                        req.session.user = result
-                        res.json({ auth: true, token: token, email: email, result: result })
+                        req.session.username = result
+                        res.json({ auth: true, token: token, email: email, result: result})
                         res.status(200)
                     } else {
                         res.json({ auth: false, message: "Email or password invalid" })

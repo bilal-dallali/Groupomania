@@ -131,6 +131,7 @@ export default {
           this.$router.push("/")
         }
         localStorage.setItem("token", response.data.token)
+        localStorage.setItem("username", response.data.result[0].username)
       },
     },
     mounted() {
