@@ -10,9 +10,10 @@ export default {
     },
     data: function() {
       return {
-        title: "",
-        description: "",
-        author: "",
+        allArticles: [],
+        title: [],
+        description: [],
+        author: [],
         file: "",
         message: "",
         error: false
@@ -22,36 +23,34 @@ export default {
         axios
             .get("http://localhost:3001/uploads/posts")
             .then(response => {
-                console.log(response)
-                this.author = response.data[0].author,
-                this.title = response.data[0].title,
-                this.description = response.data[0].description
+                console.log("bonjour")
+                console.log(response.data)
+                for(const allPost of response.data) {
+                    this.allArticles.push(allPost)
+                }
+                //this.author = response.data[0].author,
+                //this.title = response.data.title,
+                //this.description = response.data.description
             })
     }
 }
 </script>
 <template>
-    <div class="card mb-3 m-auto">
-        <div class="card-header">
+    <div :key="index" v-for="(article, index) in allArticles" class="card mb-3 m-auto">
+        
+        <div class="card-header flex-start">
             <img 
-            src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp" class="rounded-circle" 
+            src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp" class="rounded-circle me-2" 
             alt="Avatar">
-            <!--Catherine de la compta-->
-            {{author}}
+            {{article.author}}
         </div>
         <img src="https://picsum.photos/400/200" alt="card-img-top" class="card-img-top">
         <div class="card-body">
             <h5 class="card-title">
-                <!--Card title-->
-                {{title}}
+                {{article.title}}
             </h5>
             <p class="card-text">
-                <!--
-                Lorem ipsum dolor sit amet consectetur adipisicing 
-                elit Lorem ipsum dolor sit amet consectetur adipisicing 
-                elit. Ullam, amet minus maiores rerum quasi natus et 
-                voluptates placeat iste asperiores!-->
-                {{description}}
+                {{article.description}}
             </p>
             <p class="card-text"><small class="text-muted">Last updated 3 minutes ago</small></p>
             <Comment></Comment>
