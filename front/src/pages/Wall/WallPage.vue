@@ -2,7 +2,6 @@
     <div class="container-sm">
         <PostForm></PostForm>
         <Card></Card>
-        
     </div>
 </template>
 
@@ -16,6 +15,7 @@ export default {
         Card,
         PostForm
     },
+    
 }
 </script>
 

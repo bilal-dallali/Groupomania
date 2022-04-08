@@ -18,7 +18,7 @@ export default {
         error: false
       }
     },
-    mounted () {
+    created () {
         axios
             .get("http://localhost:3001/uploads/posts")
             .then(response => {

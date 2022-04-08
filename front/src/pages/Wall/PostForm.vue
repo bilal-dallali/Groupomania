@@ -65,6 +65,7 @@ export default {
                 token: localStorage.getItem("token")
             }).then(() => {
                 this.$router.push("/")
+                window.location.href = ('home')
             })
             
         }
