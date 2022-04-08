@@ -2,9 +2,7 @@
     <div class="container-sm">
         <PostForm></PostForm>
         <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
+        
     </div>
 </template>
 

@@ -17,6 +17,8 @@
           </span>
         </p>
 
+        <div>{{loginMessage}}</div>
+
         <div class="form-floating" v-if="mode == 'create'">
             <input v-model="username" name="username" type="text" class="form-control" id="floatingInput" placeholder="username">
             <label for="floatingInput">Username</label>
@@ -78,7 +80,8 @@ export default {
         username: "",
         password: "",
         invalidLogin: "",
-        invalidRegister: ""
+        invalidRegister: "",
+        loginMessage: ""
       }
     },
     computed: {
@@ -115,9 +118,9 @@ export default {
         if(this.username == "" && this.email == "" && this.password == "") {
           console.log("Something went wrong")
         } else {
-          //localStorage.setItem("token", payload.data.token)
           console.log(response)
-          this.$router.push("/")
+          window.location.href = ('login')
+          this.loginMessage = "account created you can login now"
         }
       },
       login: async function() {
@@ -130,6 +133,7 @@ export default {
         } else {
           this.$router.push("/")
         }
+        localStorage.clear()
         localStorage.setItem("token", response.data.token)
         localStorage.setItem("username", response.data.result[0].username)
       },

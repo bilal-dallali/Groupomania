@@ -1,10 +1,3 @@
-<script>
-import Logo from "../ui/svg/Logo.vue"
-export default {
-    name: "Navbar",
-    components: { Logo }
-}
-</script>
 <template>
     <header class="p-3 bg-dark text-white">
         <div class="container">
@@ -26,7 +19,7 @@ export default {
 
                 <div class="text-end">
                     <a href="/login">
-                        <button type="button" class="btn btn-outline-light me-2">Logout</button>
+                        <button @click="logout" type="button" class="btn btn-outline-light me-2">Logout</button>
                     </a>
                     <a href="/login">
                         <button type="button" class="btn btn-primary">Login</button>
@@ -37,6 +30,19 @@ export default {
         </div>
   </header>
 </template>
+
+<script>
+import Logo from "../ui/svg/Logo.vue"
+export default {
+    name: "Navbar",
+    components: { Logo },
+    methods: {
+        logout: function() {
+            localStorage.clear()
+        }
+    }
+}
+</script>
 
 
 <style>

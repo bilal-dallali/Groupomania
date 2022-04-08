@@ -61,7 +61,8 @@ export default {
                 title: this.title,
                 description: this.description,
                 //filename: this.file,
-                author: localStorage.getItem("token")
+                author: localStorage.getItem("username"),
+                token: localStorage.getItem("token")
             }).then(() => {
                 this.$router.push("/")
             })

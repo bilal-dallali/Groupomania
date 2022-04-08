@@ -30,17 +30,17 @@ const storage = multer.diskStorage({
 const upload = multer({storage})
 
 app.post("/posts", (req, res) => {
-    const { title, description, author } = req.body
+    const { title, description, author, token } = req.body
 
     db.query(
-        "INSERT INTO Uploads (title, description, author) VALUES (?, ?, ?);",
-        [title, description, author],
+        "INSERT INTO Uploads (title, description, author, token) VALUES (?, ?, ?, ?);",
+        [title, description, author, token],
         (err, results) => {
             if(err) {
                 res.status(400).json(err)
                 console.log(err)
             }
-            if(!author) {
+            if(!author && !token) {
                 console.log(err)
             }
             else {
@@ -51,15 +51,15 @@ app.post("/posts", (req, res) => {
     )
 })
 
-//app.get("/posts", (req, res) => {
-//    db.query("SELECT * FROM Uploads;", (err, result) => {
-//        if (err) {
-//            res.status(400).json(err)
-//        } else {
-//            res.status(200).json(result)
-//        }
-//    })
-//})
+app.get("/posts", (req, res) => {
+    db.query("SELECT * FROM Uploads;", (err, result) => {
+        if (err) {
+            res.status(400).json(err)
+        } else {
+            res.status(200).json(result)
+        }
+    })
+})
 
 //app.use(function(err, req, res, next) {
 //    if(err.code === "LIMIT_FILE_TYPES") {
