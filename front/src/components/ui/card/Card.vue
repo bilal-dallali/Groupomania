@@ -36,6 +36,7 @@ export default {
 }
 </script>
 <template>
+<div class="main-div">
     <div :key="index" v-for="(article, index) in allArticles" class="card mb-3 m-auto">
         
         <div class="card-header flex-start">
@@ -63,6 +64,7 @@ export default {
             </div>
         </div>
     </div>
+</div>
 </template>
 <style>
 @media (min-width: 768px) {
@@ -74,5 +76,11 @@ export default {
 .card-header img
 {
     width: 50px;
+}
+
+.main-div
+{
+    display: flex;
+    flex-direction: column-reverse;
 }
 </style>
