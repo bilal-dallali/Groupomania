@@ -129,6 +129,12 @@ export default {
         localStorage.setItem("token", response.data.token)
         localStorage.setItem("username", response.data.result[0].username)
         localStorage.setItem("email", response.data.email)
+        localStorage.setItem("id", response.data.result[0].id)
+        localStorage.setItem("phone", response.data.result[0].phone)
+        localStorage.setItem("job", response.data.result[0].job)
+        localStorage.setItem("website", response.data.result[0].website)
+        localStorage.setItem("github", response.data.result[0].github)
+        localStorage.setItem("linkedin", response.data.result[0].linkedin)
       },
     },
     mounted() {

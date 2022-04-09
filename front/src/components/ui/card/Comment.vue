@@ -27,7 +27,6 @@ export default {
         axios
             .get("http://localhost:3001/uploads/comments")
             .then(response => {
-                //console.log(response.data)
                 for(const allPost of response.data) {
                     this.allComments.push(allPost)
                 }
@@ -35,7 +34,7 @@ export default {
         //axios
         //    .get("http://localhost:3001/uploads/posts")
         //    .then(response => {
-        //        console.log(response.data)
+        //        
         //    })
     },
 }

@@ -1,6 +1,53 @@
 <script>
+import axios from "axios"
 export default {
     name: "EditProfile",
+    data: function() {
+      return {
+        username: "",
+        website: "",
+        github: "",
+        linkedin: "",
+        phone: "",
+        job: "",
+      }
+    },
+    created () {
+        axios
+            .get("http://localhost:3001/users/profile")
+            .then(response => {
+                this.username = localStorage.getItem("username")
+                this.email = localStorage.getItem("email")
+                this.website = localStorage.getItem("website")
+                this.github = localStorage.getItem("github")
+                this.linkedin = localStorage.getItem("linkedin")
+                this.phone = localStorage.getItem("phone")
+                this.job = localStorage.getItem("job")
+            })
+    },
+    methods: {
+        addInfos: async function() {
+            const response = await axios.put("http://localhost:3001/users/edit-profile", {
+                //token: localStorage.getItem("token"),
+                username: this.username,
+                email: this.email,
+                phone: this.phone,
+                job: this.job,
+                website: this.website,
+                github: this.github,
+                linkedin: this.linkedin,
+                id: localStorage.getItem("id")
+            })
+            localStorage.setItem("username", response.data.username)
+            localStorage.setItem("email", response.data.email)
+            localStorage.setItem("phone", response.data.phone)
+            localStorage.setItem("job", response.data.job)
+            localStorage.setItem("website", response.data.website)
+            localStorage.setItem("github", response.data.github)
+            localStorage.setItem("linkedin", response.data.linkedin)
+            window.location.href = ('edit-profile')
+        }
+    }
 }
 </script>
 
@@ -25,7 +72,7 @@ export default {
                         <h6 class="mb-0 mb-576">Username</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="text" class="form-control" value="John Doe">
+                        <input v-model="username" type="text" class="form-control">
                     </div>
                 </div>
 
@@ -34,7 +81,7 @@ export default {
                         <h6 class="mb-0 mb-576">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="text" class="form-control" value="john@example.com">
+                        <input v-model="email" type="text" class="form-control">
                     </div>
                 </div>
 
@@ -43,7 +90,7 @@ export default {
                         <h6 class="mb-0 mb-576">Phone</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="text" class="form-control" value="(239) 816-9029">
+                        <input v-model="phone" type="text" class="form-control">
                     </div>
                 </div>
 
@@ -52,7 +99,7 @@ export default {
                         <h6 class="mb-0 mb-576">Job</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="text" class="form-control" value="Front-end developer">
+                        <input v-model="job" type="text" class="form-control">
                     </div>
                 </div>
 
@@ -61,7 +108,7 @@ export default {
                         <h6 class="mb-0 mb-576">Website</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="text" class="form-control" value="www.bilal-webdeveloper.com">
+                        <input v-model="website" type="text" class="form-control">
                     </div>
                 </div>
 
@@ -70,7 +117,7 @@ export default {
                         <h6 class="mb-0 mb-576">Github</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="text" class="form-control" value="bilal-webdeveloper">
+                        <input v-model="github" type="text" class="form-control">
                     </div>
                 </div>
 
@@ -79,14 +126,14 @@ export default {
                         <h6 class="mb-0 mb-576">Linkedin</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="text" class="form-control" value="Bilal Dallali">
+                        <input v-model="linkedin" type="text" class="form-control">
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <div class="col-sm-3"></div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="button" class="btn btn-primary px-4" value="Save Changes">
+                        <input @click="addInfos" type="button" class="btn btn-primary px-4" value="Save Changes">
                     </div>
                 </div>
             </div>
@@ -100,7 +147,15 @@ export default {
 body
 {
     background: #f7f7ff;
-    margin-top:20px;
+    margin: 0;
+    padding: 0;
+}
+h1
+{
+    display: flex;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 .card
 {

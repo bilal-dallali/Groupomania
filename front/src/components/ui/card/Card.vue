@@ -56,7 +56,6 @@ export default {
         axios
             .get("http://localhost:3001/uploads/posts")
             .then(response => {
-                //console.log(response.data)
                 for(const allPost of response.data) {
                     this.allArticles.push(allPost)
                 }

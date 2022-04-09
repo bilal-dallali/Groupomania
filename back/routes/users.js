@@ -104,17 +104,33 @@ app.post("/login", (req, res) => {
     )
 })
 
-//app.get("/profile", (req, res) => {
-//    db.query("SELECT * FROM Users;", (err, result) => {
-//        if (err) {
-//            res.status(400).json(err)
-//        } else {
-//            res.status(200).json(result)
-//        }
-//    })
-//})
+app.get("/profile", (req, res) => {
+    db.query("SELECT * FROM Users;", (err, result) => {
+        if (err) {
+            res.status(400).json(err)
+        } else {
+            res.status(200).json(result)
+        }
+    })
+})
 
-app.put("/", (req, res) => {})
+app.put("/edit-profile", (req, res) => {
+    const {username, email, phone, job, website, github, linkedin, id } = req.body
+
+    db.query(
+        `UPDATE Users SET username = ?, email = ?, phone = ?, job = ?, website = ?, github = ?, linkedin = ? WHERE id = ${id};`,
+        [username, email, phone, job, website, github, linkedin, id],
+        (err, result) => {
+            if(err) {
+                res.status(400).json(err)
+                console.log(err)
+            } else {
+                res.status(200).json({ result: result, username: username, email: email, phone: phone, job: job, website: website, github: github, linkedin: linkedin })
+                console.log(req.body)
+            }
+        }
+    )
+})
 
 app.delete("/:id", (req, res) => {})
 

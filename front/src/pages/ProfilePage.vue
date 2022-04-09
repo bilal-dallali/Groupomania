@@ -1,36 +1,49 @@
 <script>
+import axios from "axios"
 export default {
-    name: "ProfilePage"
+    name: "ProfilePage",
+    data: function() {
+      return {
+        username: "",
+        website: "",
+        github: "",
+        linkedin: "",
+        email: "",
+        phone: "",
+        job: "",
+      }
+    },
+    created () {
+        axios
+            .get("http://localhost:3001/users/profile")
+            .then(response => {
+                this.email = localStorage.getItem("email")
+                this.username = localStorage.getItem("username")
+                this.website = localStorage.getItem("website")
+                this.github = localStorage.getItem("github")
+                this.linkedin = localStorage.getItem("linkedin")
+                this.phone = localStorage.getItem("phone")
+                this.job = localStorage.getItem("job")
+            })
+    },
 }
 </script>
 
 <template>
 <div class="container">
     <div class="main-body">
-    
-          <!-- Breadcrumb -->
-          <nav aria-label="breadcrumb" class="main-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
-              <li class="breadcrumb-item active" aria-current="page">User Profile</li>
-            </ol>
-          </nav>
-          <!-- /Breadcrumb -->
-    
           <div class="row gutters-sm">            
             <div class="card col-md-12 mb-3">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
-                      <h4>John Doe</h4>
-                      <p class="text-secondary mb-1">Full Stack Developer</p>
-                      <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                      <h4>{{username}}</h4>
+                      <p class="text-secondary mb-1">{{job}}</p>
                       <a href="/edit-profile">
                         <button class="btn btn-primary">Edit</button>
                       </a>
-                      <button class="btn btn-outline-primary">Message</button>
+                      <!--<button class="btn btn-outline-primary">Message</button>-->
                     </div>
                   </div>
                 </div>
@@ -43,21 +56,21 @@ export default {
                       <h6 class="mb-0 me-auto ms-2">
                           Website
                       </h6>
-                      <span class="text-secondary">https://bootdey.com</span>
+                      <span class="text-secondary">{{website}}</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                       <img src="../assets/svg/github.svg" alt="Github Logo">
                       <h6 class="mb-0 me-auto ms-2">
                           Github
                       </h6>
-                      <span class="text-secondary">bootdey</span>
+                      <span class="text-secondary">{{github}}</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                       <img src="../assets/svg/twitter.svg" alt="Twitter Logo">
                       <h6 class="mb-0 me-auto ms-2">
                           Linkedin
                       </h6>
-                      <span class="text-secondary">@bootdey</span>
+                      <span class="text-secondary">{{linkedin}}</span>
                     </li>
                   </ul>
               </div> 
@@ -69,7 +82,7 @@ export default {
                         <h6 class="mb-0">Username</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        Kenneth Valdez
+                        {{username}}
                       </div>
                     </div>
                     <hr>
@@ -78,7 +91,7 @@ export default {
                         <h6 class="mb-0">Email</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        fip@jukmuh.al
+                        {{email}}
                       </div>
                     </div>
                     <hr>
@@ -87,7 +100,7 @@ export default {
                         <h6 class="mb-0">Phone</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        (239) 816-9029
+                        {{phone}}
                       </div>
                     </div>
                     <hr>
@@ -96,7 +109,7 @@ export default {
                         <h6 class="mb-0">Job</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        Front end developer
+                        {{job}}
                       </div>
                     </div>
                     <hr>
