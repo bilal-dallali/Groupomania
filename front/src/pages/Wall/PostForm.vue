@@ -1,10 +1,10 @@
 <template>
 <form @submit.prevent="upload()" enctype="multipart/form-data">
-    <div v-if="message" :class="`message ${error ? 'is-danger' : 'is-success'}`">
-        <div class="message-body mt-2">
-            {{message}}
-        </div>
+    
+    <div class="message-body mt-2 green">
+        {{successfullyPosted}}
     </div>
+
     <div class="mt-3">
         <input v-model="title" class="form-control mb-1" id="title" type="text" placeholder="title">
         <!--<textarea contenteditable="true" class="form-control pb-0 pt-2" data-text="comment" placeholder="Leave a comment here" id=""></textarea>-->
@@ -30,6 +30,10 @@ body
 {
     background-color: #5f5F5F1a !important;
 }
+.green
+{
+    color: green;
+}
 
 
 </style>
@@ -44,7 +48,8 @@ export default {
         title: "",
         description: "",
         file: "",
-        message: "",
+        successfullyPosted: "",
+        errorPosted: "",
         error: false
       }
     },
@@ -66,6 +71,7 @@ export default {
             }).then(() => {
                 this.$router.push("/")
                 window.location.href = ('home')
+                this.successfullyPosted = "Published successfully"
             })
             
         }

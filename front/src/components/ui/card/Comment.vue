@@ -4,7 +4,24 @@ export default {
     name: "Comment",
     components: {
         Avatar
-    }
+    },
+    data: function() {
+      return {
+        allComments: [],
+        author: "",
+        comment: ""
+      }
+    },
+    //created () {
+    //    axios
+    //        .get("http://localhost:3001/uploads/comments")
+    //        .then(response => {
+    //            console.log(response.data)
+    //            for(const allPost of response.data) {
+    //                this.allComments.push(allPost)
+    //            }
+    //        })
+    //},
 }
 </script>
 
@@ -12,8 +29,8 @@ export default {
     <div class="d-flex gap-1">
         <Avatar />
         <div class="d-flex flex-column comment-text p-1">
-            <p>François</p>
-            <p>C'est intéressant</p>
+            <p>{{author}}</p>
+            <p>{{comment}}</p>
         </div>
     </div>
 </template>

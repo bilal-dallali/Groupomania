@@ -61,6 +61,36 @@ app.get("/posts", (req, res) => {
     })
 })
 
+app.post("/comments", (req, res) => {
+    const author = req.body.author
+    //const id = req.body.id
+    const comment = req.body.comment
+    const token = req.body.token
+
+    //db.query(
+    //    "SELECT idUploads FROM Uploads;",
+    //    (err, result) => {
+    //        if(err) {
+    //            res.status(400).json(err)
+    //        } else {
+    //            res.status(200)
+    //        }
+    //    }
+    //)
+    db.query(
+        "INSERT INTO Comments (author, comment, token) VALUES (?, ?, ?);",
+        [author, comment, token],
+        (err, result) => {
+            if(err) {
+                res.status(400).json(err)
+            } else {
+                res.status(200).json(result)
+                console.log(req.body)
+            }
+        }
+    )
+})
+
 //app.use(function(err, req, res, next) {
 //    if(err.code === "LIMIT_FILE_TYPES") {
 //        res.status(422).json({ error: "Only images are allowed"})
