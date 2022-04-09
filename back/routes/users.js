@@ -104,6 +104,16 @@ app.post("/login", (req, res) => {
     )
 })
 
+//app.get("/profile", (req, res) => {
+//    db.query("SELECT * FROM Users;", (err, result) => {
+//        if (err) {
+//            res.status(400).json(err)
+//        } else {
+//            res.status(200).json(result)
+//        }
+//    })
+//})
+
 app.put("/", (req, res) => {})
 
 app.delete("/:id", (req, res) => {})

@@ -19,14 +19,16 @@ export default {
                     </label>
                     <input id="file-input" type="file">
                 </div>
+
                 <div class="row mb-3">
                     <div class="col-sm-3">
-                        <h6 class="mb-0 mb-576">Full Name</h6>
+                        <h6 class="mb-0 mb-576">Username</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                         <input type="text" class="form-control" value="John Doe">
                     </div>
                 </div>
+
                 <div class="row mb-3">
                     <div class="col-sm-3">
                         <h6 class="mb-0 mb-576">Email</h6>
@@ -35,6 +37,7 @@ export default {
                         <input type="text" class="form-control" value="john@example.com">
                     </div>
                 </div>
+
                 <div class="row mb-3">
                     <div class="col-sm-3">
                         <h6 class="mb-0 mb-576">Phone</h6>
@@ -43,14 +46,7 @@ export default {
                         <input type="text" class="form-control" value="(239) 816-9029">
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <div class="col-sm-3">
-                        <h6 class="mb-0 mb-576">Mobile</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        <input type="text" class="form-control" value="(320) 380-4539">
-                    </div>
-                </div>
+
                 <div class="row mb-3">
                     <div class="col-sm-3">
                         <h6 class="mb-0 mb-576">Job</h6>
@@ -59,6 +55,7 @@ export default {
                         <input type="text" class="form-control" value="Front-end developer">
                     </div>
                 </div>
+
                 <div class="row mb-3">
                     <div class="col-sm-3">
                         <h6 class="mb-0 mb-576">Website</h6>
@@ -67,6 +64,7 @@ export default {
                         <input type="text" class="form-control" value="www.bilal-webdeveloper.com">
                     </div>
                 </div>
+
                 <div class="row mb-3">
                     <div class="col-sm-3">
                         <h6 class="mb-0 mb-576">Github</h6>
@@ -75,6 +73,7 @@ export default {
                         <input type="text" class="form-control" value="bilal-webdeveloper">
                     </div>
                 </div>
+
                 <div class="row mb-3">
                     <div class="col-sm-3">
                         <h6 class="mb-0 mb-576">Linkedin</h6>
@@ -83,6 +82,7 @@ export default {
                         <input type="text" class="form-control" value="Bilal Dallali">
                     </div>
                 </div>
+                
                 <div class="row">
                     <div class="col-sm-3"></div>
                     <div class="col-sm-9 text-secondary">
