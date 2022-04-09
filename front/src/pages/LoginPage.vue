@@ -136,6 +136,7 @@ export default {
         localStorage.clear()
         localStorage.setItem("token", response.data.token)
         localStorage.setItem("username", response.data.result[0].username)
+        localStorage.setItem("email", response.data.email)
       },
     },
     mounted() {

@@ -45,7 +45,9 @@ export default {
             alt="Avatar">
             {{article.author}}
         </div>
+        
         <img src="https://picsum.photos/400/200" alt="card-img-top" class="card-img-top">
+        
         <div class="card-body">
             <h5 class="card-title">
                 {{article.title}}
