@@ -1,5 +1,16 @@
+<template>
+    <div :key="index" v-for="(article, index) in allComments" class="d-flex gap-1">
+        <Avatar />
+        <div class="d-flex flex-column comment-text p-1">
+            <p>{{article.author}}</p>
+            <p>{{article.comment}}</p>
+        </div>
+    </div>
+</template>
+
 <script>
 import Avatar from "../Avatar.vue"
+import axios from "axios"
 export default {
     name: "Comment",
     components: {
@@ -12,28 +23,18 @@ export default {
         comment: ""
       }
     },
-    //created () {
-    //    axios
-    //        .get("http://localhost:3001/uploads/comments")
-    //        .then(response => {
-    //            console.log(response.data)
-    //            for(const allPost of response.data) {
-    //                this.allComments.push(allPost)
-    //            }
-    //        })
-    //},
+    created () {
+        axios
+            .get("http://localhost:3001/uploads/comments")
+            .then(response => {
+                console.log(response.data)
+                for(const allPost of response.data) {
+                    this.allComments.push(allPost)
+                }
+            })
+    },
 }
 </script>
-
-<template>
-    <div class="d-flex gap-1">
-        <Avatar />
-        <div class="d-flex flex-column comment-text p-1">
-            <p>{{author}}</p>
-            <p>{{comment}}</p>
-        </div>
-    </div>
-</template>
     
 <style scoped>
 .comment-text

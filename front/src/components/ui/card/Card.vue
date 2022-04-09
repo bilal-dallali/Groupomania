@@ -67,7 +67,10 @@ export default {
             await axios.post("http://localhost:3001/uploads/comments", {
                 author: localStorage.getItem("username"),
                 comment: this.comment,
-                token: localStorage.getItem("token")
+                token: localStorage.getItem("token"),
+            }).then(() => {
+                this.$router.push("/")
+                window.location.href = ('home')
             })
         }
     }

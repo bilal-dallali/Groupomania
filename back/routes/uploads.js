@@ -91,6 +91,16 @@ app.post("/comments", (req, res) => {
     )
 })
 
+app.get("/comments", (req, res) => {
+    db.query("SELECT * FROM Comments;", (err, result) => {
+        if (err) {
+            res.status(400).json(err)
+        } else {
+            res.status(200).json(result)
+        }
+    })
+})
+
 //app.use(function(err, req, res, next) {
 //    if(err.code === "LIMIT_FILE_TYPES") {
 //        res.status(422).json({ error: "Only images are allowed"})
