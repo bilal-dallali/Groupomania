@@ -49,36 +49,12 @@ export default {
                 </div>
             </div>
             <div class="d-flex flex-column flex-md-row gap-3">
-              <div class="card col-md-4">
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                      <img src="../assets/svg/world.svg" alt="World Logo">
-                      <h6 class="mb-0 me-auto ms-2">
-                          Website
-                      </h6>
-                      <span class="text-secondary">{{website}}</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                      <img src="../assets/svg/github.svg" alt="Github Logo">
-                      <h6 class="mb-0 me-auto ms-2">
-                          Github
-                      </h6>
-                      <span class="text-secondary">{{github}}</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                      <img src="../assets/svg/linkedin.svg" alt="Linkedin Logo">
-                      <h6 class="mb-0 me-auto ms-2">
-                          Linkedin
-                      </h6>
-                      <span class="text-secondary">{{linkedin}}</span>
-                    </li>
-                  </ul>
-              </div> 
-              <div class="card col-md-8">
+              <div class="card col-md-12">
                 
                   <div class="card-body">
-                    <div class="row">
-                      <div class="col-sm-3">
+                    <div class="row inline">
+                      <div class="col-sm-3 inline">
+                        <img class="me-2 icon-size" src="../assets/svg/username.svg" alt="username logo">
                         <h6 class="mb-0">Username</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
@@ -86,8 +62,9 @@ export default {
                       </div>
                     </div>
                     <hr>
-                    <div class="row">
-                      <div class="col-sm-3">
+                    <div class="row inline">
+                      <div class="col-sm-3 inline">
+                        <img class="me-2" src="../assets/svg/email.svg" alt="email logo">
                         <h6 class="mb-0">Email</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
@@ -95,8 +72,9 @@ export default {
                       </div>
                     </div>
                     <hr>
-                    <div class="row">
-                      <div class="col-sm-3">
+                    <div class="row inline">
+                      <div class="col-sm-3 inline">
+                        <img class="me-2" src="../assets/svg/phone.svg" alt="phone logo">
                         <h6 class="mb-0">Phone</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
@@ -104,12 +82,43 @@ export default {
                       </div>
                     </div>
                     <hr>
-                    <div class="row">
-                      <div class="col-sm-3">
+                    <div class="row inline">
+                      <div class="col-sm-3 inline">
+                        <img class="me-2" src="../assets/svg/job.svg" alt="job logo">
                         <h6 class="mb-0">Job</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
                         {{job}}
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row inline">
+                      <div class="col-sm-3 inline">
+                        <img class="me-2" src="../assets/svg/world.svg" alt="website logo">
+                        <h6 class="mb-0">Website</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        {{website}}
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row inline">
+                      <div class="col-sm-3 inline">
+                        <img class="me-2" src="../assets/svg/github.svg" alt="github Logo">
+                        <h6 class="mb-0">Github</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        {{github}}
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row inline">
+                      <div class="col-sm-3 inline">
+                        <img class="me-2" src="../assets/svg/linkedin.svg" alt="linkedin Logo">
+                        <h6 class="mb-0">Linkedin</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        {{linkedin}}
                       </div>
                     </div>
                     <hr>
@@ -119,7 +128,6 @@ export default {
                       </div>
                     </div>
                   </div>
-                
               </div>
             </div>
           </div>
@@ -233,6 +241,12 @@ body
 {
   --gap: 4rem;
 }
+.inline
+{
+  display: flex;
+  align-items: center;
+}
+
 
 @media (min-width: 768px) {
   .col-md-4
