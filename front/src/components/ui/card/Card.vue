@@ -18,7 +18,9 @@
             <p class="card-text">
                 {{article.description}}
             </p>
+            <!--
             <p class="card-text"><small class="text-muted">Last updated 3 minutes ago</small></p>
+            -->
             <Comment></Comment>
 
             <div class="d-flex gap-1">

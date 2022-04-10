@@ -26,7 +26,7 @@ app.post("/signup", (req, res) => {
             console.log("successfully registered")
         }
         db.query(
-            "INSERT INTO Users (username, email, password) VALUES (?, ?, ?);",
+            "INSERT INTO Users (username, email, password, phone, job, website, github, linkedin) VALUES (?, ?, ?, '', '', '', '', '');",
             [username, email, hash],
             (err, result) => {
                 if(err) {
