@@ -66,7 +66,7 @@ export default {
                       <span class="text-secondary">{{github}}</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                      <img src="../assets/svg/twitter.svg" alt="Twitter Logo">
+                      <img src="../assets/svg/linkedin.svg" alt="Linkedin Logo">
                       <h6 class="mb-0 me-auto ms-2">
                           Linkedin
                       </h6>

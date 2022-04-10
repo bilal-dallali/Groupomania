@@ -45,7 +45,7 @@ export default {
             localStorage.setItem("website", response.data.website)
             localStorage.setItem("github", response.data.github)
             localStorage.setItem("linkedin", response.data.linkedin)
-            window.location.href = ('edit-profile')
+            window.location.href = ('profile')
         }
     }
 }
