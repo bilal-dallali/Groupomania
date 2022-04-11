@@ -6,16 +6,6 @@ const jwt = require("jsonwebtoken")
 
 const db = require("../config/db.js")
 
-//app.get("/login", (req, res) => {
-//    db.query("SELECT * FROM Users;", (err, result) => {
-//        if (err) {
-//            res.status(400).json(err)
-//        } else {
-//            res.status(200).json(result)
-//        }
-//    })
-//})
-
 app.post("/signup", (req, res) => {
     const { username, email, password } = req.body
 

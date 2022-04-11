@@ -1,5 +1,5 @@
 <template>
-<form @submit.prevent="upload()" enctype="multipart/form-data">
+<form @submit.prevent="sendFile()" enctype="multipart/form-data">
     
     <div class="message-body mt-2 green">
         {{successfullyPosted}}
@@ -12,9 +12,9 @@
     </div>
 
     <div class="d-flex">
-        <label for="file-input" class="btn btn-secondary mt-1">Add File</label>
-        <input id="file-input" type="file" ref="file" name="file" />
-        <button type="submit.prevent" class="btn btn-primary mt-1 ms-auto badge">Post</button>
+        <label for="file">Upload File</label>
+        <input type="file" ref="file" @change="selectFile()"/>
+        <button @click="upload()" type="submit.prevent" class="btn btn-primary mt-1 ms-auto badge">Post</button>
     </div>
 </form>
 
@@ -22,10 +22,7 @@
 </template>
 
 <style module>
-input
-{
-    display: none;
-}
+
 body
 {
     background-color: #5f5F5F1a !important;
@@ -54,6 +51,19 @@ export default {
       }
     },
     methods: {
+        selectFile() {
+            this.file = this.$refs.file.files[0]
+        },
+        async sendFile() {
+            const formData = new FormData()
+            formData.append("file", this.file)
+            try {
+                await axios.post("http://localhost:3001/uploads/posts", formData)
+            } catch(err) {
+                console.log(err)
+            }
+            
+        },
         //fileUpload: function() {
         //    axios.post("http://localhost:3001/uploads/images", {
         //        file: this.file
@@ -70,7 +80,7 @@ export default {
                 token: localStorage.getItem("token")
             }).then(() => {
                 this.$router.push("/")
-                window.location.href = ('home')
+                //window.location.href = ('home')
                 this.successfullyPosted = "Published successfully"
             })
             

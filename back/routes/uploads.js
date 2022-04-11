@@ -1,6 +1,6 @@
 const express = require("express")
-const path = require("path")
 const multer = require("multer")
+const path = require("path")
 const app = express.Router()
 
 //const fileFilter = function(req, file, cb) {
@@ -18,23 +18,23 @@ const app = express.Router()
 const db = require("../config/db")
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "./images")
+    destination: (req, file, callback) => {
+        callback(null, "./images")
     },
-    filename: (req, file, cb) => {
+    filename: (req, file, callback) => {
         console.log(file)
-        cb(null, Date.now() + path.extname(file.originalname))
+        callback(null, Date.now() + path.extname(file.originalname))
     }
 })
 
-const upload = multer({storage})
+const upload = multer({storage: storage})
 
-app.post("/posts", (req, res) => {
-    const { title, description, author, token } = req.body
+app.post("/posts", upload.single("file"), (req, res) => {
+    const { title, description, author, token, file } = req.body
 
     db.query(
-        "INSERT INTO Uploads (title, description, author, token) VALUES (?, ?, ?, ?);",
-        [title, description, author, token],
+        "INSERT INTO Uploads (title, description, author, token, file) VALUES (?, ?, ?, ?, ?);",
+        [title, description, author, token, file],
         (err, results) => {
             if(err) {
                 res.status(400).json(err)
