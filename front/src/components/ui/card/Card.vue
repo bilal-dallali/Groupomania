@@ -1,6 +1,6 @@
 <template>
 <div class="main-div">
-    <div :key="index" v-for="(article, index) in allArticles" class="card mb-3 m-auto">
+    <div :key="index" v-for="(article, index) in allArticles" class="card mb-3">
         
         <div class="card-header flex-start">
             <img 
@@ -9,7 +9,7 @@
             {{article.author}}
         </div>
         
-        <img :src="article.file" alt="card-img-top" class="card-img-top">
+        <img :src="article.file" alt="card-img-top" class="card-img-top img">
         
         <div class="card-body">
             <h5 class="card-title">
@@ -79,24 +79,38 @@ export default {
 </script>
 
 <style>
+
 @media (min-width: 768px) {
     .card
     {
-        width: 70%;
+        width: 60%;
     }
 }
 .card-header img
 {
     width: 50px;
 }
-.card-img-top
+.img
 {
-    display: flex;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 
 .main-div
 {
+    margin-right: auto;
+    margin-left: auto;
     display: flex;
     flex-direction: column-reverse;
+    align-items: center;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .card
+    {
+        width: 100%;
+    }
 }
 </style>
