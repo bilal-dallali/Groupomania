@@ -3,8 +3,30 @@ const app = express.Router()
 const bcrypt = require("bcrypt")
 const saltRounds = 10
 const jwt = require("jsonwebtoken")
+const multer = require("multer")
 
 const db = require("../config/db.js")
+
+const MIME_TYPES = {
+    'image/jpg': 'jpg',
+    'image/jpeg': 'jpg',
+    'image/png': 'png',
+    'image/webp': 'webp'
+  };
+  
+
+const storage = multer.diskStorage({
+    destination: (req, file, callback) => {
+        callback(null, "./../front/images/profile-pictures")
+    },
+    filename: (req, file, callback) => {
+        const name = file.originalname.split(" ").join("_")
+        const extension = MIME_TYPES[file.mimetype]
+        callback(null, name + Date.now() + '.' + extension)
+    }
+})
+
+const upload = multer({storage})
 
 app.post("/signup", (req, res) => {
     const { username, email, password } = req.body
@@ -105,7 +127,7 @@ app.get("/profile", (req, res) => {
 })
 
 app.put("/edit-profile", (req, res) => {
-    const {username, email, phone, job, website, github, linkedin, id } = req.body
+    const { username, email, phone, job, website, github, linkedin, id } = req.body
 
     db.query(
         `UPDATE Users SET username = ?, email = ?, phone = ?, job = ?, website = ?, github = ?, linkedin = ? WHERE id = ${id};`,
@@ -117,6 +139,27 @@ app.put("/edit-profile", (req, res) => {
             } else {
                 res.status(200).json({ result: result, username: username, email: email, phone: phone, job: job, website: website, github: github, linkedin: linkedin })
                 console.log(req.body)
+            }
+        }
+    )
+})
+
+app.put("/edit-picture", upload.single("file"), function(req, res) {
+    const id = req.body.id
+    const file = "images/profile-picture/" + req.file.filename
+    console.log(file)
+
+    db.query(
+        `UPDATE Users SET file = ? WHERE id = ${id};`,
+        [id, file],
+        (err, result) => {
+            if(err) {
+                res.status(400).json(err)
+                console.log(err)
+            } else {
+                res.status(200).json({ result: result, file: file })
+                console.log(req.body)
+                console.log(file)
             }
         }
     )

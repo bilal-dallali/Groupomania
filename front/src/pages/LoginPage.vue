@@ -135,6 +135,7 @@ export default {
         localStorage.setItem("website", response.data.result[0].website)
         localStorage.setItem("github", response.data.result[0].github)
         localStorage.setItem("linkedin", response.data.result[0].linkedin)
+        localStorage.setItem("file", response.data.result[0].file)
       },
     },
     mounted() {

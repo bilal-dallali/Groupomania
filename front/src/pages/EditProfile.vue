@@ -26,6 +26,9 @@ export default {
             })
     },
     methods: {
+        selectPicture() {
+            this.file = this.$refs.file.files[0]
+        },
         addInfos: async function() {
             const response = await axios.put("http://localhost:3001/users/edit-profile", {
                 //token: localStorage.getItem("token"),
@@ -45,7 +48,21 @@ export default {
             localStorage.setItem("website", response.data.website)
             localStorage.setItem("github", response.data.github)
             localStorage.setItem("linkedin", response.data.linkedin)
-            window.location.href = ('profile')
+            //window.location.href = ('profile')
+
+            const formData = new FormData()
+            formData.append("file", this.file)
+            formData.append("id", localStorage.getItem("id"))
+            try {
+                const response = await axios.put("http://localhost:3001/users/edit-picture", formData)
+                //localStorage.getItem("id")
+                localStorage.setItem("file", response.data.file)
+                window.location.href = ("edit-profile")
+            } catch(err) {
+                console.log(err)
+            }
+            
+            
         }
     }
 }
@@ -58,13 +75,14 @@ export default {
 <body>
     <div class="col-lg-8 w-100">
         <div class="card">
+            <form enctype="multipart/form-data">
             <div class="card-body">
                 <div class="d-flex flex-column align-items-center text-center mt-2">
                     <img src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp" alt="Admin" class="rounded-circle img-edit-profile">
                     <label for="file-input">
                         <i class="text-center bi bi-camera-fill"></i>
                     </label>
-                    <input id="file-input" type="file">
+                    <input id="file-input" type="file" ref="file" name="file" @change="selectPicture()">
                 </div>
 
                 <div class="row mb-3">
@@ -137,6 +155,7 @@ export default {
                     </div>
                 </div>
             </div>
+            </form>
         </div>
     </div>
 </body>
