@@ -150,7 +150,7 @@ app.put("/edit-picture", upload.single("file"), function(req, res) {
     console.log(file)
 
     db.query(
-        `UPDATE Users SET file = ? WHERE id = ${id};`,
+        `UPDATE Users SET file = '${file}' WHERE id = ${id};`,
         [id, file],
         (err, result) => {
             if(err) {
@@ -159,7 +159,7 @@ app.put("/edit-picture", upload.single("file"), function(req, res) {
             } else {
                 res.status(200).json({ result: result, file: file })
                 console.log(req.body)
-                console.log(file)
+                console.log("file :", file)
             }
         }
     )
