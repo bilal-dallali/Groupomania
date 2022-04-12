@@ -27,7 +27,7 @@ const MIME_TYPES = {
 
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
-        callback(null, "./images")
+        callback(null, "./../front/images/wall")
     },
     filename: (req, file, callback) => {
         const name = file.originalname.split(" ").join("_")
@@ -35,19 +35,15 @@ const storage = multer.diskStorage({
         callback(null, name + Date.now() + '.' + extension)
     }
 })
-//console.log(storage.getFilename)
 
 const upload = multer({storage})
-//console.log(upload)
 
 app.post("/posts", upload.single("file"), function(req, res) {
-    const { title, description, author, token, file } = req.body
-    const filename = req.file.filename
-    //console.log("filename :", filename.filename)
-    console.log("filename", filename)
+    const { title, description, author, token } = req.body
+    const file = "images/wall/" + req.file.filename
 
     db.query(
-        `INSERT INTO Uploads (title, description, author, token, file) VALUES (?, ?, ?, ?, '${filename}');`,
+        `INSERT INTO Uploads (title, description, author, token, file) VALUES (?, ?, ?, ?, ?);`,
         [title, description, author, token, file],
         (err, results) => {
             if(err) {
@@ -56,10 +52,12 @@ app.post("/posts", upload.single("file"), function(req, res) {
             }
             if(!author && !token) {
                 console.log(err)
+                res.status(400)
             }
             else {
                 res.status(200).json(results)
                 console.log("req.body", req.body)
+                console.log(file)
             }
         }
     )
@@ -77,20 +75,9 @@ app.get("/posts", (req, res) => {
 
 app.post("/comments", (req, res) => {
     const author = req.body.author
-    //const id = req.body.id
     const comment = req.body.comment
     const token = req.body.token
 
-    //db.query(
-    //    "SELECT idUploads FROM Uploads;",
-    //    (err, result) => {
-    //        if(err) {
-    //            res.status(400).json(err)
-    //        } else {
-    //            res.status(200)
-    //        }
-    //    }
-    //)
     db.query(
         "INSERT INTO Comments (author, comment, token) VALUES (?, ?, ?);",
         [author, comment, token],

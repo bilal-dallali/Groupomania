@@ -1,5 +1,5 @@
 <template>
-<form @submit.prevent="sendFile()" enctype="multipart/form-data">
+<form @submit="sendFile" enctype="multipart/form-data">
     
     <div class="message-body mt-2 green">
         {{successfullyPosted}}
@@ -12,9 +12,9 @@
     </div>
 
     <div class="d-flex">
-        <label for="file">Upload File</label>
-        <input type="file" ref="file" name="file" @change="selectFile()"/>
-        <button @click="upload()" type="submit.prevent" class="btn btn-primary mt-1 ms-auto badge">Post</button>
+        <label for="file-input" class="btn btn-secondary mt-1">Upload File</label>
+        <input id="file-input" type="file" ref="file" name="file" @change="selectFile()"/>
+        <button type="submit" class="btn btn-primary mt-1 ms-auto badge">Post</button>
     </div>
 </form>
 
@@ -26,6 +26,10 @@
 body
 {
     background-color: #5f5F5F1a !important;
+}
+input
+{
+    display: none;
 }
 .green
 {
@@ -66,35 +70,8 @@ export default {
             } catch(err) {
                 console.log(err)
             }
-            //this.$router.push("/")
             window.location.href = ('home')
-            console.log(formData)
-            
         },
-        //fileUpload: function() {
-        //    axios.post("http://localhost:3001/uploads/images", {
-        //        file: this.file
-        //    }).then(() => {
-        //        this.router.push("/login")
-        //    })
-        //},
-        //upload: async function() {
-        //    const formData = new FormData()
-        //    formData.append("file", this.file)
-        //    await axios.post("http://localhost:3001/uploads/posts", {
-        //        file: formData,
-        //        title: this.title,
-        //        description: this.description,
-        //        //file: this.file,
-        //        author: localStorage.getItem("username"),
-        //        token: localStorage.getItem("token")
-        //    }).then(() => {
-        //        this.$router.push("/")
-        //        window.location.href = ('home')
-        //        this.successfullyPosted = "Published successfully"
-        //    })
-        //    
-        //}
     }
 }
 

@@ -9,7 +9,7 @@
             {{article.author}}
         </div>
         
-        <img src="https://picsum.photos/400/200" alt="card-img-top" class="card-img-top">
+        <img :src="article.file" alt="card-img-top" class="card-img-top">
         
         <div class="card-body">
             <h5 class="card-title">
@@ -22,7 +22,6 @@
             <p class="card-text"><small class="text-muted">Last updated 3 minutes ago</small></p>
             -->
             <Comment></Comment>
-
             <div class="d-flex gap-1">
                 <Avatar></Avatar>
                 <input v-model="comment" type="text" class="form-control" placeholder="comment" aria-label="Username">
@@ -31,6 +30,7 @@
         </div>
     </div>
 </div>
+
 </template>
 
 <script>
@@ -88,6 +88,10 @@ export default {
 .card-header img
 {
     width: 50px;
+}
+.card-img-top
+{
+    display: flex;
 }
 
 .main-div
