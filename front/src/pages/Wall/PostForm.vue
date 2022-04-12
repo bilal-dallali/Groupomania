@@ -6,14 +6,14 @@
     </div>
 
     <div class="mt-3">
-        <input v-model="title" class="form-control mb-1" id="title" type="text" placeholder="title">
+        <input v-model="title" ref="title" class="form-control mb-1" id="title" type="text" placeholder="title">
         <!--<textarea contenteditable="true" class="form-control pb-0 pt-2" data-text="comment" placeholder="Leave a comment here" id=""></textarea>-->
-        <textarea v-model="description" class="form-control" rows="2" placeholder="description"></textarea>
+        <textarea v-model="description" ref="description" class="form-control" rows="2" placeholder="description"></textarea>
     </div>
 
     <div class="d-flex">
         <label for="file">Upload File</label>
-        <input type="file" ref="file" @change="selectFile()"/>
+        <input type="file" ref="file" name="file" @change="selectFile()"/>
         <button @click="upload()" type="submit.prevent" class="btn btn-primary mt-1 ms-auto badge">Post</button>
     </div>
 </form>
@@ -56,12 +56,19 @@ export default {
         },
         async sendFile() {
             const formData = new FormData()
-            formData.append("file", this.file)
+            formData.append("title", this.title)
+            formData.append("description", this.description)
+            formData.append("author", localStorage.getItem("username"))
+            formData.append("token", localStorage.getItem("token"))
+            formData.append("file", this.file, this.file.file)
             try {
                 await axios.post("http://localhost:3001/uploads/posts", formData)
             } catch(err) {
                 console.log(err)
             }
+            //this.$router.push("/")
+            window.location.href = ('home')
+            console.log(formData)
             
         },
         //fileUpload: function() {
@@ -71,20 +78,23 @@ export default {
         //        this.router.push("/login")
         //    })
         //},
-        upload: async function() {
-            await axios.post("http://localhost:3001/uploads/posts", {
-                title: this.title,
-                description: this.description,
-                //filename: this.file,
-                author: localStorage.getItem("username"),
-                token: localStorage.getItem("token")
-            }).then(() => {
-                this.$router.push("/")
-                //window.location.href = ('home')
-                this.successfullyPosted = "Published successfully"
-            })
-            
-        }
+        //upload: async function() {
+        //    const formData = new FormData()
+        //    formData.append("file", this.file)
+        //    await axios.post("http://localhost:3001/uploads/posts", {
+        //        file: formData,
+        //        title: this.title,
+        //        description: this.description,
+        //        //file: this.file,
+        //        author: localStorage.getItem("username"),
+        //        token: localStorage.getItem("token")
+        //    }).then(() => {
+        //        this.$router.push("/")
+        //        window.location.href = ('home')
+        //        this.successfullyPosted = "Published successfully"
+        //    })
+        //    
+        //}
     }
 }
 

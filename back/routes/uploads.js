@@ -17,23 +17,37 @@ const app = express.Router()
 
 const db = require("../config/db")
 
+const MIME_TYPES = {
+    'image/jpg': 'jpg',
+    'image/jpeg': 'jpg',
+    'image/png': 'png',
+    'image/webp': 'webp'
+  };
+  
+
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
         callback(null, "./images")
     },
     filename: (req, file, callback) => {
-        console.log(file)
-        callback(null, Date.now() + path.extname(file.originalname))
+        const name = file.originalname.split(" ").join("_")
+        const extension = MIME_TYPES[file.mimetype]
+        callback(null, name + Date.now() + '.' + extension)
     }
 })
+//console.log(storage.getFilename)
 
-const upload = multer({storage: storage})
+const upload = multer({storage})
+//console.log(upload)
 
-app.post("/posts", upload.single("file"), (req, res) => {
+app.post("/posts", upload.single("file"), function(req, res) {
     const { title, description, author, token, file } = req.body
+    const filename = req.file.filename
+    //console.log("filename :", filename.filename)
+    console.log("filename", filename)
 
     db.query(
-        "INSERT INTO Uploads (title, description, author, token, file) VALUES (?, ?, ?, ?, ?);",
+        `INSERT INTO Uploads (title, description, author, token, file) VALUES (?, ?, ?, ?, '${filename}');`,
         [title, description, author, token, file],
         (err, results) => {
             if(err) {
