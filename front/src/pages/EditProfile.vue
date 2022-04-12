@@ -4,6 +4,9 @@ export default {
     name: "EditProfile",
     data: function() {
       return {
+        allArticles: [],
+        imageprofile: "",
+        file: localStorage.getItem("file"),
         username: "",
         website: "",
         github: "",
@@ -78,7 +81,9 @@ export default {
             <form enctype="multipart/form-data">
             <div class="card-body">
                 <div class="d-flex flex-column align-items-center text-center mt-2">
-                    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp" alt="Admin" class="rounded-circle img-edit-profile">
+                    
+                    <img :src="file" alt="Admin" class="rounded-circle img-edit-profile">
+                    
                     <label for="file-input">
                         <i class="text-center bi bi-camera-fill"></i>
                     </label>
@@ -194,6 +199,7 @@ h1
 .img-edit-profile
 {
     width: 150px;
+    height: 150px;
 }
 .me-2
 {

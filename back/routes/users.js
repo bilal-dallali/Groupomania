@@ -146,7 +146,7 @@ app.put("/edit-profile", (req, res) => {
 
 app.put("/edit-picture", upload.single("file"), function(req, res) {
     const id = req.body.id
-    const file = "images/profile-picture/" + req.file.filename
+    const file = "images/profile-pictures/" + req.file.filename
     console.log(file)
 
     db.query(
