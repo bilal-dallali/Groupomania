@@ -21,7 +21,17 @@
             <!--
             <p class="card-text"><small class="text-muted">Last updated 3 minutes ago</small></p>
             -->
-            <Comment></Comment>
+            <!--<h6>{{article.idUploads}}</h6>-->
+            
+            <div :key="index" v-for="(comments, index) in allComments" class="d-flex gap-1">
+        
+                <div class="d-flex flex-column comment-text p-1">
+                    <p>{{comments.author}}</p>
+                    <p>{{comments.comment}}</p>
+                    
+                </div>
+            </div>
+
             <div class="d-flex gap-1">
                 <Avatar></Avatar>
                 <input v-model="comment" type="text" class="form-control" placeholder="comment" aria-label="Username">
@@ -46,6 +56,7 @@ export default {
     data: function() {
       return {
         allArticles: [],
+        allComments: [],
         title: [],
         description: [],
         author: [],
@@ -62,12 +73,19 @@ export default {
                     this.allArticles.push(allPost)
                 }
             })
-        
+        axios
+            .get("http://localhost:3001/uploads/comments")
+            .then(res => {
+                for(const allPost of res.data) {
+                    this.allComments.push(allPost)
+                }
+            })
     },
     methods: {
         uploadComment: async function() {
             await axios.post("http://localhost:3001/uploads/comments", {
                 author: localStorage.getItem("username"),
+                //idPost: this.idUploads,
                 comment: this.comment,
                 token: localStorage.getItem("token"),
                 avatar: localStorage.getItem("file")
@@ -115,5 +133,24 @@ export default {
     {
         width: 100%;
     }
+}
+
+.comment-text
+{
+    background-color: #e9ecef;
+    border-radius: 5px;
+    width: 100%;
+}
+.card-body > .d-flex
+{
+    margin-bottom: 1em;
+}
+.d-flex p
+{
+    margin-bottom: 0;
+}
+.d-flex p:nth-child(1)
+{
+    font-weight: 500;
 }
 </style>

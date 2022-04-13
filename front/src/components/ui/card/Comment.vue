@@ -31,11 +31,7 @@ export default {
                     this.allComments.push(allPost)
                 }
             })
-        //axios
-        //    .get("http://localhost:3001/uploads/posts")
-        //    .then(response => {
-        //        
-        //    })
+        
     },
 }
 </script>

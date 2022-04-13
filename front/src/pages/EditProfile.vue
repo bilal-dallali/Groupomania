@@ -53,6 +53,7 @@ export default {
             const formData = new FormData()
             formData.append("file", this.file)
             formData.append("id", localStorage.getItem("id"))
+            formData.append("token", localStorage.getItem("token"))
             try {
                 const response = await axios.put("http://localhost:3001/users/edit-picture", formData)
                 //localStorage.getItem("id")
