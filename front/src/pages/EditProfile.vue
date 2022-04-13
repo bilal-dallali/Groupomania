@@ -4,10 +4,10 @@ export default {
     name: "EditProfile",
     data: function() {
       return {
-        allArticles: [],
-        imageprofile: "",
-        file: localStorage.getItem("file"),
+        file: "",
         username: "",
+        email: "",
+        phone: "",
         website: "",
         github: "",
         linkedin: "",
@@ -16,17 +16,14 @@ export default {
       }
     },
     created () {
-        axios
-            .get("http://localhost:3001/users/profile")
-            .then(response => {
-                this.username = localStorage.getItem("username")
-                this.email = localStorage.getItem("email")
-                this.website = localStorage.getItem("website")
-                this.github = localStorage.getItem("github")
-                this.linkedin = localStorage.getItem("linkedin")
-                this.phone = localStorage.getItem("phone")
-                this.job = localStorage.getItem("job")
-            })
+        this.username = localStorage.getItem("username")
+        this.email = localStorage.getItem("email")
+        this.website = localStorage.getItem("website")
+        this.github = localStorage.getItem("github")
+        this.linkedin = localStorage.getItem("linkedin")
+        this.phone = localStorage.getItem("phone")
+        this.job = localStorage.getItem("job")
+        this.file = localStorage.getItem("file")
     },
     methods: {
         selectPicture() {
@@ -63,6 +60,7 @@ export default {
                 window.location.href = ("edit-profile")
             } catch(err) {
                 console.log(err)
+                window.location.href = ("edit-profile")
             }
             
             
@@ -81,9 +79,7 @@ export default {
             <form enctype="multipart/form-data">
             <div class="card-body">
                 <div class="d-flex flex-column align-items-center text-center mt-2">
-                    
                     <img :src="file" alt="Admin" class="rounded-circle img-edit-profile">
-                    
                     <label for="file-input">
                         <i class="text-center bi bi-camera-fill"></i>
                     </label>

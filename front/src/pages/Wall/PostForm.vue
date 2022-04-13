@@ -63,6 +63,7 @@ export default {
             formData.append("title", this.title)
             formData.append("description", this.description)
             formData.append("author", localStorage.getItem("username"))
+            formData.append("authorpicture", localStorage.getItem("file"))
             formData.append("token", localStorage.getItem("token"))
             formData.append("file", this.file, this.file.file)
             try {

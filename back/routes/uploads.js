@@ -39,12 +39,12 @@ const storage = multer.diskStorage({
 const upload = multer({storage})
 
 app.post("/posts", upload.single("file"), function(req, res) {
-    const { title, description, author, token } = req.body
+    const { title, description, author, token, authorpicture } = req.body
     const file = "images/wall/" + req.file.filename
 
     db.query(
-        `INSERT INTO Uploads (title, description, author, token, file) VALUES (?, ?, ?, ?, ?);`,
-        [title, description, author, token, file],
+        `INSERT INTO Uploads (title, description, author, token, file, authorpicture) VALUES (?, ?, ?, ?, ?, ?);`,
+        [title, description, author, token, file, authorpicture],
         (err, results) => {
             if(err) {
                 res.status(400).json(err)

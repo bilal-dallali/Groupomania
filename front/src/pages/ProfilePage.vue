@@ -14,17 +14,14 @@ export default {
       }
     },
     created () {
-        axios
-            .get("http://localhost:3001/users/profile")
-            .then(response => {
-                this.email = localStorage.getItem("email")
-                this.username = localStorage.getItem("username")
-                this.website = localStorage.getItem("website")
-                this.github = localStorage.getItem("github")
-                this.linkedin = localStorage.getItem("linkedin")
-                this.phone = localStorage.getItem("phone")
-                this.job = localStorage.getItem("job")
-            })
+      this.email = localStorage.getItem("email")
+      this.username = localStorage.getItem("username")
+      this.website = localStorage.getItem("website")
+      this.github = localStorage.getItem("github")
+      this.linkedin = localStorage.getItem("linkedin")
+      this.phone = localStorage.getItem("phone")
+      this.job = localStorage.getItem("job")
+      this.file = localStorage.getItem("file")
     },
 }
 </script>
@@ -36,7 +33,7 @@ export default {
             <div class="card col-md-12 mb-3">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                    <img :src="file" alt="Admin" class="rounded-circle profile-picture">
                     <div class="mt-3">
                       <h4>{{username}}</h4>
                       <p class="text-secondary mb-1">{{job}}</p>
@@ -245,6 +242,11 @@ body
 {
   display: flex;
   align-items: center;
+}
+.profile-picture
+{
+  width: 150px;
+  height: 150px;
 }
 
 

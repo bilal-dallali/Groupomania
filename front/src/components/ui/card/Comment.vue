@@ -1,6 +1,6 @@
 <template>
     <div :key="index" v-for="(article, index) in allComments" class="d-flex gap-1">
-        <Avatar />
+        
         <div class="d-flex flex-column comment-text p-1">
             <p>{{article.author}}</p>
             <p>{{article.comment}}</p>

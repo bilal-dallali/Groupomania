@@ -1,11 +1,16 @@
 <script>
 export default {
     name: "Avatar",
+    data: function() {
+      return {
+        file: localStorage.getItem("file"),
+      }
+    },
 }
 </script>
 
 <template>
-    <img src="https://picsum.photos/50" alt="card-img-top" class="card-img-top rounded-circle shadow-4">
+    <img :src="file" alt="card-img-top" class="card-img-top rounded-circle shadow-4">
 </template>
 
 <style scoped>

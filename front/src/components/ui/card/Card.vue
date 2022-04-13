@@ -4,7 +4,7 @@
         
         <div class="card-header flex-start">
             <img 
-            src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp" class="rounded-circle me-2" 
+            :src="article.authorpicture" class="rounded-circle me-2 avatar" 
             alt="Avatar">
             {{article.author}}
         </div>
@@ -62,6 +62,7 @@ export default {
                     this.allArticles.push(allPost)
                 }
             })
+        
     },
     methods: {
         uploadComment: async function() {
@@ -69,6 +70,7 @@ export default {
                 author: localStorage.getItem("username"),
                 comment: this.comment,
                 token: localStorage.getItem("token"),
+                avatar: localStorage.getItem("file")
             }).then(() => {
                 this.$router.push("/")
                 window.location.href = ('home')
@@ -88,7 +90,8 @@ export default {
 }
 .card-header img
 {
-    width: 50px;
+    width: 40px;
+    height: 40px;
 }
 .img
 {
