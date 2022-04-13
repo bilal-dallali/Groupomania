@@ -11,6 +11,7 @@
                         <router-link to="/home" class="nav-link px-2 text-secondary">Home</router-link>
                     </li>
                     <li><router-link to="/profile" class="nav-link px-2 text-white">Profile</router-link></li>
+                    <li><router-link to="/all-profile" class="nav-link px-2 text-white">All Profiles</router-link></li>
                 </ul>
 <!--
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
