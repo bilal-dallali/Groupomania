@@ -3,18 +3,6 @@ const multer = require("multer")
 const path = require("path")
 const app = express.Router()
 
-//const fileFilter = function(req, file, cb) {
-//    const allowedTypes = ["image/jpeg", "image/png", "image/gif"]
-//    file.size
-//
-//    if(!allowedTypes.includes(file.mimetype)) {
-//        const error = new Error("Wrong file type")
-//        error.code = "LIMIT_FILE_TYPES"
-//        return cb(error, false)
-//    }
-//    cb(null, true)
-//}
-
 const db = require("../config/db")
 
 const MIME_TYPES = {
@@ -101,11 +89,5 @@ app.get("/comments", (req, res) => {
         }
     })
 })
-
-//app.use(function(err, req, res, next) {
-//    if(err.code === "LIMIT_FILE_TYPES") {
-//        res.status(422).json({ error: "Only images are allowed"})
-//    }
-//})
 
 module.exports = app

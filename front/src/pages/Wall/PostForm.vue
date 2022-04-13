@@ -7,7 +7,6 @@
 
     <div class="mt-3">
         <input v-model="title" ref="title" class="form-control mb-1" id="title" type="text" placeholder="title">
-        <!--<textarea contenteditable="true" class="form-control pb-0 pt-2" data-text="comment" placeholder="Leave a comment here" id=""></textarea>-->
         <textarea v-model="description" ref="description" class="form-control" rows="2" placeholder="description"></textarea>
     </div>
 

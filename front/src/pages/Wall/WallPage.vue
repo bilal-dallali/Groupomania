@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex"
 import Card from "../../components/ui/card/Card.vue"
 import PostForm from "./PostForm.vue"
 export default {

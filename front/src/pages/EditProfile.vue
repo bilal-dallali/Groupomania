@@ -31,7 +31,6 @@ export default {
         },
         addInfos: async function() {
             const response = await axios.put("http://localhost:3001/users/edit-profile", {
-                //token: localStorage.getItem("token"),
                 username: this.username,
                 email: this.email,
                 phone: this.phone,
@@ -48,7 +47,6 @@ export default {
             localStorage.setItem("website", response.data.website)
             localStorage.setItem("github", response.data.github)
             localStorage.setItem("linkedin", response.data.linkedin)
-            //window.location.href = ('profile')
 
             const formData = new FormData()
             formData.append("file", this.file)
@@ -56,12 +54,11 @@ export default {
             formData.append("token", localStorage.getItem("token"))
             try {
                 const response = await axios.put("http://localhost:3001/users/edit-picture", formData)
-                //localStorage.getItem("id")
                 localStorage.setItem("file", response.data.file)
-                window.location.href = ("edit-profile")
+                window.location.href = ("profile")
             } catch(err) {
                 console.log(err)
-                window.location.href = ("edit-profile")
+                window.location.href = ("profile")
             }
             
             

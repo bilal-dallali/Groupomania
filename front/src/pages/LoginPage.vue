@@ -60,7 +60,6 @@
 
 
 <script>
-import { mapState } from 'vuex'
 import axios from "axios"
 
 export default {
@@ -92,7 +91,6 @@ export default {
           }
         }
       },
-      //...mapState(['status'])
     },
     methods: {
       switchToCreateAccount: function() {
