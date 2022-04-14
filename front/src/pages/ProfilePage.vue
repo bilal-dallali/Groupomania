@@ -11,6 +11,7 @@ export default {
         email: "",
         phone: "",
         job: "",
+        id: localStorage.getItem("id")
       }
     },
     created () {
@@ -22,6 +23,15 @@ export default {
       this.phone = localStorage.getItem("phone")
       this.job = localStorage.getItem("job")
       this.file = localStorage.getItem("file")
+    },
+    methods: {
+      deleteAccount: async function(id) {
+        const response = await axios.delete("http://localhost:3001/users/remove", {
+          id: localStorage.getItem("id"),
+          id: this.id,
+        })
+        console.log(response)
+      },
     },
 }
 </script>
@@ -121,7 +131,7 @@ export default {
                     <hr>
                     <div class="row">
                       <div class="col-sm-12">
-                        <a class="btn btn-info " target="__blank" href="/edit-profile">Edit</a>
+                        <button @click="deleteAccount()" type="button" class="btn btn-danger">Delete your account permanently</button>
                       </div>
                     </div>
                   </div>

@@ -165,6 +165,21 @@ app.put("/edit-picture", upload.single("file"), function(req, res) {
     )
 })
 
-app.delete("/:id", (req, res) => {})
+app.delete("/remove/:id", (req, res) => {
+    
+    db.query(
+        `DELETE FROM Users WHERE id = ${id};`,
+        id,
+        (err, result) => {
+            if(err) {
+                res.status(400).json(err)
+                console.log(err)
+            } else {
+                res.status(200).json(result)
+                console.log(req.body)
+            }
+        }
+    )
+})
 
 module.exports = app
