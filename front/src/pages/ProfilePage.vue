@@ -25,12 +25,12 @@ export default {
       this.file = localStorage.getItem("file")
     },
     methods: {
-      deleteAccount: async function(id) {
-        const response = await axios.delete("http://localhost:3001/users/remove", {
+      deleteAccount: async function() {
+        const response = await axios.put("http://localhost:3001/users/remove", {
           id: localStorage.getItem("id"),
-          id: this.id,
         })
-        console.log(response)
+        localStorage.clear()
+        window.location.href = ('login')
       },
     },
 }

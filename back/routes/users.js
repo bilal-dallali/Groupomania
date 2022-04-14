@@ -165,8 +165,8 @@ app.put("/edit-picture", upload.single("file"), function(req, res) {
     )
 })
 
-app.delete("/remove/:id", (req, res) => {
-    
+app.put("/remove", (req, res) => {
+    const id = req.body.id
     db.query(
         `DELETE FROM Users WHERE id = ${id};`,
         id,
