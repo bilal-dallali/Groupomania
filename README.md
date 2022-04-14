@@ -9,3 +9,36 @@ CONFIGURE BACKEND
 - create a table called Uploads with an incremented id and then as columns title, descripton, file, author, token, authorpicture
 - create a table called Comments with as column an incremented id, author, comment and token
 - run "nodemon index" to launch the server on port 3001
+
+commmand sql to use to create tables
+- CREATE SCHEMA groupomania;
+- CREATE TABLE groupomania.Users (
+  id INT NOT NULL AUTO_INCREMENT,
+  username VARCHAR(45) NOT NULL,
+  email VARCHAR(45) NOT NULL,
+  password VARCHAR(200) NOT NULL,
+  phone VARCHAR(45) NOT NULL,
+  job VARCHAR(45) NOT NULL,
+  website VARCHAR(45) NOT NULL,
+  github VARCHAR(45) NOT NULL,
+  linkedin VARCHAR(45) NOT NULL,
+  file VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE INDEX email_UNIQUE (email ASC) VISIBLE);
+
+- CREATE TABLE groupomania.Uploads (
+  idUploads INT NOT NULL AUTO_INCREMENT,
+  title VARCHAR(45) NOT NULL,
+  description VARCHAR(1000) NOT NULL,
+  file VARCHAR(45) NOT NULL,
+  author VARCHAR(45) NOT NULL,
+  token VARCHAR(500) NOT NULL,
+  picture VARCHAR(45) NOT NULL,
+  PRIMARY KEY (idUploads));
+
+- CREATE TABLE groupomania.Comments (
+  idComments INT NOT NULL AUTO_INCREMENT,
+  author VARCHAR(45) NOT NULL,
+  comment VARCHAR(45) NOT NULL,
+  token VARCHAR(500) NOT NULL,
+  PRIMARY KEY (idComments));
