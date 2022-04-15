@@ -43,10 +43,8 @@ app.post("/signup", (req, res) => {
             (err, result) => {
                 if(err) {
                     res.status(400).json(err)
-                    console.log(err)
                 } else {
                     res.status(200).json(result)
-                    console.log("req.body", req.body)
                 }
             }
         )
@@ -135,10 +133,8 @@ app.put("/edit-profile", (req, res) => {
         (err, result) => {
             if(err) {
                 res.status(400).json(err)
-                console.log(err)
             } else {
                 res.status(200).json({ result: result, username: username, email: email, phone: phone, job: job, website: website, github: github, linkedin: linkedin })
-                console.log(req.body)
             }
         }
     )
@@ -147,7 +143,6 @@ app.put("/edit-profile", (req, res) => {
 app.put("/edit-picture", upload.single("file"), function(req, res) {
     const id = req.body.id
     const file = "images/profile-pictures/" + req.file.filename
-    console.log(file)
 
     db.query(
         `UPDATE Users SET file = '${file}' WHERE id = ${id};`,
@@ -155,11 +150,8 @@ app.put("/edit-picture", upload.single("file"), function(req, res) {
         (err, result) => {
             if(err) {
                 res.status(400).json(err)
-                console.log(err)
             } else {
                 res.status(200).json({ result: result, file: file })
-                console.log(req.body)
-                console.log("file :", file)
             }
         }
     )
@@ -173,10 +165,8 @@ app.put("/remove", (req, res) => {
         (err, result) => {
             if(err) {
                 res.status(400).json(err)
-                console.log(err)
             } else {
                 res.status(200).json(result)
-                console.log(req.body)
             }
         }
     )

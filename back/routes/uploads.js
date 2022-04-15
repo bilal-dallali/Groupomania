@@ -36,16 +36,12 @@ app.post("/posts", upload.single("file"), function(req, res) {
         (err, results) => {
             if(err) {
                 res.status(400).json(err)
-                console.log(err)
             }
             if(!author && !token) {
-                console.log(err)
                 res.status(400)
             }
             else {
                 res.status(200).json(results)
-                console.log("req.body", req.body)
-                console.log(file)
             }
         }
     )
@@ -74,7 +70,6 @@ app.post("/comments", (req, res) => {
                 res.status(400).json(err)
             } else {
                 res.status(200).json(result)
-                console.log(req.body)
             }
         }
     )

@@ -57,7 +57,6 @@ export default {
                 localStorage.setItem("file", response.data.file)
                 window.location.href = ("profile")
             } catch(err) {
-                console.log(err)
                 window.location.href = ("profile")
             }
             

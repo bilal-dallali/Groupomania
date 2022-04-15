@@ -108,7 +108,6 @@ export default {
         if(this.username == "" && this.email == "" && this.password == "") {
           console.log("Something went wrong")
         } else {
-          console.log(response)
           window.location.href = ('login')
           this.loginMessage = "account created you can login now"
         }

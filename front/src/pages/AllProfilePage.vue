@@ -20,7 +20,6 @@ export default {
             .then(response => {
                 for(const allPost of response.data) {
                     this.allProfile.push(allPost)
-                    console.log(response.data)
                 }
             })
     },
