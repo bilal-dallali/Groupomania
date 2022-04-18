@@ -8,7 +8,7 @@
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li>
-                        <router-link to="/home" class="nav-link px-2 text-secondary">Home</router-link>
+                        <router-link to="/home" class="nav-link px-2 text-white">Home</router-link>
                     </li>
                     <li><router-link to="/profile" class="nav-link px-2 text-white">Profile</router-link></li>
                     <li><router-link to="/all-profile" class="nav-link px-2 text-white">All Profiles</router-link></li>

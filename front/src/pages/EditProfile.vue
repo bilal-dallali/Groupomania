@@ -76,7 +76,7 @@ export default {
             <form enctype="multipart/form-data">
             <div class="card-body">
                 <div class="d-flex flex-column align-items-center text-center mt-2">
-                    <img :src="file" alt="Admin" class="rounded-circle img-edit-profile">
+                    <img :src="file" alt="profile-picture" class="rounded-circle img-edit-profile">
                     <label for="file-input">
                         <i class="text-center bi bi-camera-fill"></i>
                     </label>

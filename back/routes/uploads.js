@@ -85,4 +85,19 @@ app.get("/comments", (req, res) => {
     })
 })
 
+app.put("/delete-posts", (req, res) => {
+    const idUploads = req.body.idUploads
+    db.query(
+        "DELETE FROM Uploads;",
+        [idUploads],
+        (err, result) => {
+            if(err) {
+                res.status(400).json(err)
+            } else {
+                res.status(200).json(result)
+            }
+        }
+    )
+})
+
 module.exports = app

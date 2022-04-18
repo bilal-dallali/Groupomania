@@ -38,11 +38,11 @@ app.post("/signup", (req, res) => {
             console.log("successfully registered")
         }
         db.query(
-            "INSERT INTO Users (username, email, password, phone, job, website, github, linkedin) VALUES (?, ?, ?, '', '', '', '', '');",
+            "INSERT INTO Users (username, email, password, phone, job, website, github, linkedin, role) VALUES (?, ?, ?, '', '', '', '', '', 'visitor');",
             [username, email, hash],
             (err, result) => {
                 if(err) {
-                    res.status(400).json(err)
+                    res.status(403).json(err)
                 } else {
                     res.status(200).json(result)
                 }
@@ -102,13 +102,13 @@ app.post("/login", (req, res) => {
                         res.status(200)
                     } else {
                         res.json({ auth: false, message: "Email or password invalid" })
-                        res.status(400)
+                        res.status(404)
                     }
                 })
             }
             else {
                 res.json({ auth: false, message: "this user does not exist" })
-                res.status(400)
+                res.status(404)
             }
         }
     )
@@ -117,7 +117,7 @@ app.post("/login", (req, res) => {
 app.get("/profile", (req, res) => {
     db.query("SELECT * FROM Users;", (err, result) => {
         if (err) {
-            res.status(400).json(err)
+            res.status(404).json(err)
         } else {
             res.status(200).json(result)
         }
@@ -149,7 +149,7 @@ app.put("/edit-picture", upload.single("file"), function(req, res) {
         [id, file],
         (err, result) => {
             if(err) {
-                res.status(400).json(err)
+                res.status(404).json(err)
             } else {
                 res.status(200).json({ result: result, file: file })
             }
@@ -164,7 +164,7 @@ app.put("/remove", (req, res) => {
         id,
         (err, result) => {
             if(err) {
-                res.status(400).json(err)
+                res.status(401).json(err)
             } else {
                 res.status(200).json(result)
             }

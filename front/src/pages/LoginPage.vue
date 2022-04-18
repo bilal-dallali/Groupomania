@@ -133,6 +133,7 @@ export default {
         localStorage.setItem("github", response.data.result[0].github)
         localStorage.setItem("linkedin", response.data.result[0].linkedin)
         localStorage.setItem("file", response.data.result[0].file)
+        localStorage.setItem("role", response.data.result[0].role)
       },
     },
     mounted() {

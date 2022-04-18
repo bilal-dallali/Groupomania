@@ -1,12 +1,14 @@
 <template>
 <div class="main-div">
     <div :key="index" v-for="(article, index) in allArticles" class="card mb-3">
-        
-        <div class="card-header flex-start">
-            <img 
-            :src="article.authorpicture" class="rounded-circle me-2 avatar" 
-            alt="Avatar">
-            {{article.author}}
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <div>
+                <img 
+                :src="article.authorpicture" class="rounded-circle me-2 avatar" 
+                alt="Avatar">
+                {{article.author}}
+            </div>
+            <div type="button" @click="deletePost()" class=""><img src="../../../../src/assets/svg/delete.svg" alt="delete-icon" class="align-items-center delete-icon"></div>
         </div>
         
         <img :src="article.file" alt="card-img-top" class="card-img-top img">
@@ -62,7 +64,9 @@ export default {
         author: [],
         file: "",
         message: "",
-        error: false
+        error: false,
+        role: localStorage.getItem("role"),
+        //idUploads: article.idUploads,
       }
     },
     created () {
@@ -71,6 +75,7 @@ export default {
             .then(response => {
                 for(const allPost of response.data) {
                     this.allArticles.push(allPost)
+                    console.log(response.data)
                 }
             })
         axios
@@ -93,6 +98,18 @@ export default {
                 this.$router.push("/")
                 window.location.href = ('home')
             })
+        },
+        deletePost: async function() {
+            
+            if(this.role === "admin") {
+                await axios.put("http://localhost:3001/uploads/delete-posts", {
+                idUploads : this.idUploads
+            })
+                window.location.href = ("home")
+            } else {
+                console.log(err)
+            }
+            //window.location.href = ("home")
         }
     }
 }
@@ -153,4 +170,11 @@ export default {
 {
     font-weight: 500;
 }
+.delete-icon
+{
+    padding-top: 10px;
+    padding-left: 22px;
+    cursor: pointer;
+}
+
 </style>

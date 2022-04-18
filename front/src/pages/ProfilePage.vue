@@ -11,7 +11,8 @@ export default {
         email: "",
         phone: "",
         job: "",
-        id: localStorage.getItem("id")
+        id: localStorage.getItem("id"),
+        role: ""
       }
     },
     created () {
@@ -23,6 +24,7 @@ export default {
       this.phone = localStorage.getItem("phone")
       this.job = localStorage.getItem("job")
       this.file = localStorage.getItem("file")
+      this.role = localStorage.getItem("role")
     },
     methods: {
       deleteAccount: async function() {
@@ -43,9 +45,10 @@ export default {
             <div class="card col-md-12 mb-3">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                    <img :src="file" alt="Admin" class="rounded-circle profile-picture">
+                    <img :src="file" alt="profile-picture" class="rounded-circle profile-picture">
                     <div class="mt-3">
                       <h4>{{username}}</h4>
+                      <p>({{role}})</p>
                       <p class="text-secondary mb-1">{{job}}</p>
                       <a href="/edit-profile">
                         <button class="btn btn-primary">Edit</button>
