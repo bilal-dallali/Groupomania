@@ -87,7 +87,7 @@ app.get("/comments", (req, res) => {
 
 app.put("/delete-posts", (req, res) => {
     const idUploads = req.body.idUploads
-    console.log(idUploads)
+
     db.query(
         `DELETE FROM Uploads WHERE idUPloads = ${idUploads};`,
         [idUploads],

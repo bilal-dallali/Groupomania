@@ -12,6 +12,7 @@ export default {
         email: "",
         phone: "",
         job: "",
+        role: localStorage.getItem("role")
       }
     },
     created () {
@@ -23,6 +24,18 @@ export default {
                 }
             })
     },
+    methods: {
+      deleteUser: async function(id) {
+        if(this.role === "admin") {
+          await axios.put("http://localhost:3001/users/remove", {
+            id: id
+          })
+          window.location.href = ("all-profile")
+        } else {
+          console.log(err)
+        }
+      }
+    }
 }
 </script>
 
@@ -106,8 +119,7 @@ export default {
                         {{profile.linkedin}}
                       </div>
                     </div>
-                    
-                    
+                    <button @click="deleteUser(profile.id)" type="submit" class="btn btn-danger">Delete user</button>
                   </div>
               </div>
             </div>

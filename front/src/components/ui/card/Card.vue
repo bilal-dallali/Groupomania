@@ -103,7 +103,7 @@ export default {
                 await axios.put("http://localhost:3001/uploads/delete-posts", {
                     idUploads : idUploads
             })
-                window.location.href = ("home")
+            window.location.href = ("home")
             } else {
                 console.log(err)
             }
