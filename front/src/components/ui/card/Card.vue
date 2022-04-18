@@ -8,7 +8,7 @@
                 alt="Avatar">
                 {{article.author}}
             </div>
-            <div type="button" @click="deletePost()" class=""><img src="../../../../src/assets/svg/delete.svg" alt="delete-icon" class="align-items-center delete-icon"></div>
+            <div type="button" @click="deletePost(article.idUploads)" class=""><img src="../../../../src/assets/svg/delete.svg" alt="delete-icon" class="align-items-center delete-icon"></div>
         </div>
         
         <img :src="article.file" alt="card-img-top" class="card-img-top img">
@@ -99,11 +99,11 @@ export default {
                 window.location.href = ('home')
             })
         },
-        deletePost: async function() {
+        deletePost: async function(idUploads) {
             
             if(this.role === "admin") {
                 await axios.put("http://localhost:3001/uploads/delete-posts", {
-                idUploads : this.idUploads
+                    idUploads : idUploads
             })
                 window.location.href = ("home")
             } else {
