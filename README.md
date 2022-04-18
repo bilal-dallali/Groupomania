@@ -23,6 +23,7 @@ commmand sql to use to create tables
   github VARCHAR(45) NOT NULL,
   linkedin VARCHAR(45) NOT NULL,
   file VARCHAR(45) NOT NULL,
+  role VARCHAR(45) NOT NULL,
   PRIMARY KEY (id),
   UNIQUE INDEX email_UNIQUE (email ASC) VISIBLE);
 

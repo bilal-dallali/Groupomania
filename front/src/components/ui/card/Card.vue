@@ -90,7 +90,6 @@ export default {
         uploadComment: async function() {
             await axios.post("http://localhost:3001/uploads/comments", {
                 author: localStorage.getItem("username"),
-                //idPost: this.idUploads,
                 comment: this.comment,
                 token: localStorage.getItem("token"),
                 avatar: localStorage.getItem("file")
@@ -100,7 +99,6 @@ export default {
             })
         },
         deletePost: async function(idUploads) {
-            
             if(this.role === "admin") {
                 await axios.put("http://localhost:3001/uploads/delete-posts", {
                     idUploads : idUploads
